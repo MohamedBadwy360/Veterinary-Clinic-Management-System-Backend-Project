@@ -105,6 +105,7 @@ The `PrescribedMeds` table includes:
 * `PrescriptionId`, which specifies the prescription_id being referenced as `INT`. This column thus has the `FOREIGN KEY` constraint applied, referencing the `Id` column in the `Prescriptions` table to ensure data integrity.
 * The two columns are the primary key of the table.
 * `Quantity`, which specifies the quantity of item being prescribed as `INT`.
+* `Price`, which specifies the price of the medication being prescribed as `DECIMAL(8,2)`
 * `Frequency`, which specifies how often the item be used or administered as `VARCHAR(50)`.
 
 # Reciepts
