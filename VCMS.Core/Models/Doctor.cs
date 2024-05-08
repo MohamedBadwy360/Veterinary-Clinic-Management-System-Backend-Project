@@ -1,4 +1,6 @@
-﻿namespace VCMS.Core.Models
+﻿using System.ComponentModel.DataAnnotations;
+
+namespace VCMS.Core.Models
 {
     public class Doctor
     {
@@ -7,6 +9,8 @@
         public string LastName { get; set; }
         public string PhoneNumber { get; set; }
         public string Email { get; set; }
+
+        [Range(1950, 2023)]
         public int YearGraduated { get; set; }
 
 
