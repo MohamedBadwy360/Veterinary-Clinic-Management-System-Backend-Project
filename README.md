@@ -6,4 +6,4 @@ These are REST API and Database for Veterinary Clinic Management System.
 
 You can find the design details in `Database Schema/README.md`
 
-![Database Schema](/Database%20Schema/VCMS%20Schema.png)
+![Database Schema](/Database%20Schema/VCMS_Schema.png)
