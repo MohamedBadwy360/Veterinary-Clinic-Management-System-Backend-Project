@@ -1,0 +1,13 @@
+﻿global using Microsoft.EntityFrameworkCore;
+global using VCMS.Core.IUnitOfWork;
+global using VCMS.EF.Data;
+global using VCMS.EF.UnitOfWork;
+global using Microsoft.AspNetCore.Http;
+global using Microsoft.AspNetCore.Mvc;
+global using VCMS.Business.Interfaces;
+global using VCMS.Business.Services;
+global using Swashbuckle.AspNetCore.Annotations;
+global using VCMS.Core.ApiResponse;
+global using VCMS.API.Extensions;
+global using VCMS.Business.Helpers;
+global using VCMS.Core.Dtos.SpeciesDtos;
