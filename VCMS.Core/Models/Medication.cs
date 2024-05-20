@@ -14,7 +14,10 @@
 
 
 
+        [JsonIgnore]
         public virtual List<PrescribedMeds> PrescribedMeds { get; set; } = new List<PrescribedMeds>();
+
+        [JsonIgnore]
         public virtual List<Prescription> Prescriptions { get; set; } = new List<Prescription>();
     }
 }
