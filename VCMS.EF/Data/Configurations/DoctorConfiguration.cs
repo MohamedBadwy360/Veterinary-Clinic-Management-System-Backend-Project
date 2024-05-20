@@ -9,22 +9,22 @@
                 .ValueGeneratedOnAdd();
 
             builder.Property(d => d.FirstName)
-                .HasColumnType("VARCHAR")
+                .HasColumnType(SqlServerDataTypes.VARCHAR)
                 .HasMaxLength(50)
                 .IsRequired();
 
             builder.Property(d => d.LastName)
-                .HasColumnType("VARCHAR")
+                .HasColumnType(SqlServerDataTypes.VARCHAR)
                 .HasMaxLength(50)
                 .IsRequired();
 
             builder.Property(d => d.PhoneNumber)
-                .HasColumnType("VARCHAR")
+                .HasColumnType(SqlServerDataTypes.VARCHAR)
                 .HasMaxLength(15)
                 .IsRequired();
 
             builder.Property(d => d.Email)
-                .HasColumnType("VARCHAR")
+                .HasColumnType(SqlServerDataTypes.VARCHAR)
                 .HasMaxLength(40)
                 .IsRequired();
 
@@ -35,6 +35,11 @@
                 .WithOne(c => c.Doctor)
                 .HasForeignKey(c => c.DoctorId)
                 .IsRequired();
+
+            builder.HasIndex(d => d.Email, "UIX_Doctors_Email")
+                .IsUnique();
+
+            builder.HasData(SeedData.LoadDoctors());
 
             builder.ToTable("Doctors");
         }

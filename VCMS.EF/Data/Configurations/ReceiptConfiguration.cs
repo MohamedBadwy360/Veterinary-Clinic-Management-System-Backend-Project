@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace VCMS.EF.Data.Configurations
+﻿namespace VCMS.EF.Data.Configurations
 {
     public class ReceiptConfiguration : IEntityTypeConfiguration<Receipt>
     {
@@ -15,7 +9,7 @@ namespace VCMS.EF.Data.Configurations
                 .ValueGeneratedOnAdd();
 
             builder.Property(r => r.Date)
-                .HasColumnType("DATE")
+                .HasColumnType(SqlServerDataTypes.DATE)
                 .IsRequired();
 
             builder.Property(r => r.TotalPrice)
@@ -26,6 +20,8 @@ namespace VCMS.EF.Data.Configurations
                 .WithOne(p => p.Receipt)
                 .HasForeignKey<Receipt>(r => r.PrescriptionId)
                 .IsRequired();
+
+            builder.HasData(SeedData.LoadReceipts());
 
             builder.ToTable("Receipts");
         }

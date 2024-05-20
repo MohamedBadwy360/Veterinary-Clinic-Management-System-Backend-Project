@@ -9,7 +9,7 @@
                 .ValueGeneratedOnAdd();
 
             builder.Property(d => d.Name)
-                .HasColumnName("VARCHAR")
+                .HasColumnType(SqlServerDataTypes.VARCHAR)
                 .HasMaxLength(50)
                 .IsRequired();
 
@@ -18,7 +18,12 @@
                 .HasForeignKey(c => c.DiagnosisId)
                 .IsRequired();
 
-            builder.ToTable("Diagnosis");
+            builder.HasIndex(d => d.Name, "UIX_Diagnostics_Name")
+                .IsUnique();
+
+            builder.HasData(SeedData.LoadDiagnostics());
+
+            builder.ToTable("Diagnostics");
         }
     }
 }

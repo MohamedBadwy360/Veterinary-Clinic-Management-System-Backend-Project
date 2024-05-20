@@ -9,7 +9,7 @@
                 .ValueGeneratedOnAdd();
 
             builder.Property(s => s.Name)
-                .HasColumnType("VARCHAR")
+                .HasColumnType(SqlServerDataTypes.VARCHAR)
                 .HasMaxLength(50)
                 .IsRequired();
 
@@ -17,6 +17,11 @@
                 .WithOne(p => p.Species)
                 .HasForeignKey(p => p.SpeciesId)
                 .IsRequired();
+
+            builder.HasIndex(s => s.Name, "UIX_Species_Name")
+                .IsUnique();
+
+            builder.HasData(SeedData.LoadSpecies());
 
             builder.ToTable("Species");
         }

@@ -9,11 +9,11 @@
                 .ValueGeneratedOnAdd();
 
             builder.Property(p => p.Sex)
-                .HasColumnType("TINYINT")
+                .HasColumnType(SqlServerDataTypes.TINYINT)
                 .IsRequired();
 
             builder.Property(p => p.Age)
-                .HasColumnType("VARCHAR")
+                .HasColumnType(SqlServerDataTypes.VARCHAR)
                 .HasMaxLength(25)
                 .IsRequired();
 
@@ -21,6 +21,8 @@
                 .WithOne(c => c.Patient)
                 .HasForeignKey(c => c.PatientId)
                 .IsRequired();
+
+            builder.HasData(SeedData.LoadPatients());
 
             builder.ToTable("Patients");
         }

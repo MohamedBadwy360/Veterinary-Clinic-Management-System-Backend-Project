@@ -1,7 +1,4 @@
-﻿
-using System.Data;
-
-namespace VCMS.EF.Data.Configurations
+﻿namespace VCMS.EF.Data.Configurations
 {
     public class CaseConfiguration : IEntityTypeConfiguration<Case>
     {
@@ -12,20 +9,22 @@ namespace VCMS.EF.Data.Configurations
                 .ValueGeneratedOnAdd();
 
             builder.Property(c => c.Status)
-                .HasColumnType("TINYINT")
+                .HasColumnType(SqlServerDataTypes.TINYINT)
                 .IsRequired();
 
             builder.Property(c => c.CaseType)
-                .HasColumnType("TINYINT")
+                .HasColumnType(SqlServerDataTypes.TINYINT)
                 .IsRequired();
 
             builder.Property(c => c.Date)
-                .HasColumnType("DATE")
+                .HasColumnType(SqlServerDataTypes.DATE)
                 .IsRequired();
 
             builder.Property(c => c.Notes)
-                .HasColumnType("VARCHAR")
+                .HasColumnType(SqlServerDataTypes.VARCHAR)
                 .HasMaxLength(1000);
+
+            builder.HasData(SeedData.LoadCases());
 
             builder.ToTable("Cases");
         }

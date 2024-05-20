@@ -2,3 +2,11 @@
 global using VCMS.Core.Models;
 global using Microsoft.EntityFrameworkCore.Metadata.Builders;
 global using VCMS.Core.Enums;
+global using VCMS.EF.Data.Seed;
+global using VCMS.EF.Data.Configurations;
+global using VCMS.Core.Constants;
+global using System.Linq.Expressions;
+global using VCMS.Core.Interfaces;
+global using VCMS.EF.Data;
+global using VCMS.Core.IUnitOfWork;
+global using VCMS.EF.Repositories;

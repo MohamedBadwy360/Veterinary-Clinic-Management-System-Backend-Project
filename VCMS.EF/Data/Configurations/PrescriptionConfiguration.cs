@@ -9,13 +9,26 @@
                 .ValueGeneratedOnAdd();
 
             builder.Property(p => p.Date)
-                .HasColumnType("DATE")
+                .HasColumnType(SqlServerDataTypes.DATE)
                 .IsRequired();
 
             builder.HasOne(p => p.Case)
                 .WithOne(c => c.Prescription)
                 .HasForeignKey<Prescription>(p => p.CaseId)
                 .IsRequired();
+
+            builder.HasMany(p => p.Medications)
+                .WithMany(m => m.Prescriptions)
+                .UsingEntity<PrescribedMeds>(
+                    l => l.HasOne<Medication>(pm => pm.Medication)
+                    .WithMany(m => m.PrescribedMeds)
+                    .HasForeignKey(pm => pm.MedicationId),
+
+                    r => r.HasOne<Prescription>(pm => pm.Prescription)
+                    .WithMany(m => m.PrescribedMeds)
+                    .HasForeignKey(pm => pm.PrescriptionId));
+
+            builder.HasData(SeedData.LoadPrescriptions());
 
             builder.ToTable("Prescriptions");
         }

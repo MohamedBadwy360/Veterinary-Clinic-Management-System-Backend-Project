@@ -10,22 +10,22 @@ namespace VCMS.EF.Data.Configurations
                 .ValueGeneratedOnAdd();
 
             builder.Property(c => c.FirstName)
-                .HasColumnType("VARCHAR")
+                .HasColumnType(SqlServerDataTypes.VARCHAR)
                 .HasMaxLength(50)
                 .IsRequired();
 
             builder.Property(c => c.LastName)
-                .HasColumnType("VARCHAR")
+                .HasColumnType(SqlServerDataTypes.VARCHAR)
                 .HasMaxLength(50)
                 .IsRequired();
 
             builder.Property(c => c.Address)
-                .HasColumnType("VARCHAR")
+                .HasColumnType(SqlServerDataTypes.VARCHAR)
                 .HasMaxLength(100)
                 .IsRequired();
 
             builder.Property(c => c.PhoneNumber)
-                .HasColumnType("VARCHAR")
+                .HasColumnType(SqlServerDataTypes.VARCHAR)
                 .HasMaxLength(15)
                 .IsRequired();
 
@@ -33,6 +33,8 @@ namespace VCMS.EF.Data.Configurations
                 .WithOne(p => p.Client)
                 .HasForeignKey(p => p.ClientId)
                 .IsRequired();
+
+            builder.HasData(SeedData.LoadClients());
 
             builder.ToTable("Clients");
         }
