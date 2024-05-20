@@ -1,0 +1,11 @@
+﻿global using VCMS.Core.IUnitOfWork;
+global using VCMS.Core.ApiResponse;
+global using VCMS.Core.Models;
+global using VCMS.Core.Enums;
+global using VCMS.Business.Helpers;
+global using VCMS.Business.Interfaces;
+global using AutoMapper;
+global using VCMS.Core.Dtos.SpeciesDtos;
+global using Microsoft.Data.SqlClient;
+global using Microsoft.EntityFrameworkCore;
+global using VCMS.Core.Constants;
