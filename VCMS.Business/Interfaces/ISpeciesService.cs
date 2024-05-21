@@ -2,9 +2,10 @@
 {
     public interface ISpeciesService
     {
-        Task<Response<SpeciesDto>> GetByIdAsync(int id);
-        Task<Response<IEnumerable<SpeciesDto>>> GetAllAsync();
-        Task<Response<SpeciesDto>> CreateAsync(SpeciesDto speciesDto);
-        Task<Response<SpeciesDto>> UpdateAsync(int id, SpeciesDto speciesDto);
+        Task<Response<SpeciesDto>> GetSpeciesByIdAsync(int id);
+        Task<Response<IEnumerable<SpeciesDto>>> GetAllSpeciesAsync();
+        Task<Response<SpeciesDto>> CreateSpeciesAsync(SpeciesDto speciesDto);
+        Task<Response<SpeciesDto>> UpdateSpeciesByIdAsync(int id, SpeciesDto speciesDto);
+        Task<Response<SpeciesDto>> DeleteSpeciesByIdAsync(int id);
     }
 }
