@@ -30,7 +30,7 @@
         [ProducesResponseType(typeof(Response<SpeciesDto>), StatusCodes.Status404NotFound)]
         [ProducesResponseType(typeof(Response<SpeciesDto>), StatusCodes.Status500InternalServerError)]
         [ResponseCache(CacheProfileName = "Any-180")]
-        [HttpGet("[action]")]
+        [HttpGet]
         public async Task<IActionResult> GetAllSpecies()
         {
             var response = await _speciesService.GetAllSpeciesAsync();
@@ -42,8 +42,9 @@
             Description = "Create a species in the database.")]
         [ProducesResponseType(typeof(Response<SpeciesDto>), StatusCodes.Status201Created)]
         [ProducesResponseType(typeof(Response<SpeciesDto>), StatusCodes.Status409Conflict)]
-        [ProducesResponseType(typeof(ValidationProblemDetails), StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(typeof(Response<SpeciesDto>), StatusCodes.Status400BadRequest)]
         [ProducesResponseType(typeof(Response<SpeciesDto>), StatusCodes.Status500InternalServerError)]
+        [ProducesResponseType(typeof(ValidationProblemDetails), StatusCodes.Status400BadRequest)]
         [ResponseCache(CacheProfileName = "NoCache")]
         [HttpPost]
         public async Task<IActionResult> CreateSpecies(SpeciesDto speciesDto)
@@ -63,8 +64,10 @@
         [ProducesResponseType(typeof(Response<SpeciesDto>), StatusCodes.Status200OK)]
         [ProducesResponseType(typeof(Response<SpeciesDto>), StatusCodes.Status404NotFound)]
         [ProducesResponseType(typeof(Response<SpeciesDto>), StatusCodes.Status409Conflict)]
-        [ProducesResponseType(typeof(ValidationProblemDetails), StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(typeof(Response<SpeciesDto>), StatusCodes.Status400BadRequest)]
         [ProducesResponseType(typeof(Response<SpeciesDto>), StatusCodes.Status500InternalServerError)]
+        [ProducesResponseType(typeof(ValidationProblemDetails), StatusCodes.Status400BadRequest)]
+        [ResponseCache(CacheProfileName = "NoCache")]
         [HttpPut]
         public async Task<IActionResult> UpdateSpeciesById(int id, SpeciesDto speciesDto)
         {
@@ -83,6 +86,7 @@
         [ProducesResponseType(StatusCodes.Status204NoContent)]
         [ProducesResponseType(typeof(Response<SpeciesDto>), StatusCodes.Status404NotFound)]
         [ProducesResponseType(typeof(Response<SpeciesDto>), StatusCodes.Status500InternalServerError)]
+        [ResponseCache(CacheProfileName = "NoCache")]
         [HttpDelete("{id:int}")]
         public async Task<IActionResult> DeleteSpeciesById(int id)
         {
