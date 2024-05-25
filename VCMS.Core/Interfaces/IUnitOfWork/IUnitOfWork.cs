@@ -1,6 +1,6 @@
-﻿namespace VCMS.Core.IUnitOfWork
+﻿namespace VCMS.Core.Interfaces.IUnitOfWork
 {
-    public interface IUnitOfWork : IDisposable 
+    public interface IUnitOfWork : IDisposable
     {
         IBaseRepository<Case> Cases { get; }
         IBaseRepository<Client> Clients { get; }
