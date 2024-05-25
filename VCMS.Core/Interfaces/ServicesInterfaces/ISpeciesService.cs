@@ -1,4 +1,4 @@
-﻿namespace VCMS.Business.Interfaces
+﻿namespace VCMS.Core.Interfaces.ServicesInterfaces
 {
     public interface ISpeciesService
     {
