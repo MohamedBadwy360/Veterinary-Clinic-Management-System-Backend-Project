@@ -1,4 +1,4 @@
-﻿namespace VCMS.Core.Interfaces
+﻿namespace VCMS.Core.Interfaces.DbInterfaces
 {
     public interface IBaseRepository<T> where T : class
     {
