@@ -2,6 +2,9 @@
 {
     public class SpeciesService : ISpeciesService
     {
+        private const string uniqueProperty = "name";
+        private const string invalidNameErrorMessage = "You inserted incorrect letter in species name.";
+
         private readonly IUnitOfWork _unitOfWork;
         private readonly IMapper _mapper;
         public SpeciesService(IUnitOfWork unitOfWork, IMapper mapper)
@@ -15,131 +18,62 @@
             try
             {
                 var species = await _unitOfWork.Species.GetByIdAsync(id);
-                var speciesDto = _mapper.Map<SpeciesDto>(species);
 
                 if (species is null)
                 {
-                    return Response<SpeciesDto>.Failure(EResponseStatusCode.NotFound,
-                        $"No species was found with Id {id}");
+                    return Response<SpeciesDto>.NotFound(id);
                 }
                 else
                 {
-                    return Response<SpeciesDto>.Success(EResponseStatusCode.OK, speciesDto);
+                    var speciesDto = _mapper.Map<SpeciesDto>(species);
+                    return Response<SpeciesDto>.Ok(speciesDto);
                 }
             }
             catch (Exception exception)
             {
-                // logging exception
-
-                return Response<SpeciesDto>.Failure(EResponseStatusCode.InternalServerError,
-                    $"An unexpected error occurred while retrieving the species.");
+                return ExceptionHandler.
+                    HandleGenericException<SpeciesDto>(exception, DbOperations.Retrieve);
             }            
         }
-
         public async Task<Response<IEnumerable<SpeciesDto>>> GetAllSpeciesAsync()
         {
             try
             {
                 var species = await _unitOfWork.Species.GetAllAsync();
-                var speciesDtos = _mapper.Map<IEnumerable<SpeciesDto>>(species);
                 if (species is null)
                 {
-                    return Response<IEnumerable<SpeciesDto>>.Failure(EResponseStatusCode.NotFound,
-                        "No species were found in database yet.");
+                    return Response<IEnumerable<SpeciesDto>>.NotFound();
                 }
                 else
                 {
-                    return Response<IEnumerable<SpeciesDto>>.Success(EResponseStatusCode.OK, speciesDtos);
+                    var speciesDtos = _mapper.Map<IEnumerable<SpeciesDto>>(species);
+                    return Response<IEnumerable<SpeciesDto>>.Ok(speciesDtos);
                 }
             }
             catch (Exception exception)
             {
-                // logging exception
-
-                return Response<IEnumerable<SpeciesDto>>.Failure(EResponseStatusCode.InternalServerError,
-                    $"An unexpected error occurred while retrieving the species.");
+                return ExceptionHandler.
+                    HandleGenericException<IEnumerable<SpeciesDto>>(exception, DbOperations.Retrieve);
             }
         }
-
         public async Task<Response<SpeciesDto>> CreateSpeciesAsync(SpeciesDto speciesDto)
         {
-            var species = _mapper.Map<Species>(speciesDto);
-            await _unitOfWork.Species.AddAsync(species);
-
-            try
+            if (!IsValidSpeciesName(speciesDto.Name))
             {
-                await _unitOfWork.CommitAsync();
-                return Response<SpeciesDto>.Success(EResponseStatusCode.Created, speciesDto);
+                return Response<SpeciesDto>.BadRequest(invalidNameErrorMessage);
             }
-            catch (DbUpdateException exception)
-            {
-                if (exception.InnerException is SqlException sqlException && 
-                    sqlException.Number == SqlServerErrorNumbers.ViolateUniqueConstaint)
-                {
-                    return Response<SpeciesDto>.Failure(EResponseStatusCode.Conflict,
-                        "A species with the same name already exists.");
-                }
-                else
-                {
-                    // logging exception
 
-                    return Response<SpeciesDto>.Failure(EResponseStatusCode.InternalServerError,
-                        $"A database error occurred while adding the species.");
-                }
-            }
-            catch (Exception exception)
-            {
-                // logging exception
-
-                return Response<SpeciesDto>.Failure(EResponseStatusCode.InternalServerError,
-                    "An unexpected error occurred while adding the species.");
-            }
+            return await CreateAsync(speciesDto);
         }
-
         public async Task<Response<SpeciesDto>> UpdateSpeciesByIdAsync(int id, SpeciesDto speciesDto)
         {
-            try
+            if (!IsValidSpeciesName(speciesDto.Name))
             {
-                var species = await _unitOfWork.Species.GetByIdAsync(id);
-
-                if (species is null)
-                {
-                    return Response<SpeciesDto>.Failure(EResponseStatusCode.NotFound,
-                        $"No species was found with Id {id}");
-                }
-
-                species.Name = speciesDto.Name;
-
-                _unitOfWork.Species.Update(species);
-                await _unitOfWork.CommitAsync();
-
-                return Response<SpeciesDto>.Success(EResponseStatusCode.OK, speciesDto);
+                return Response<SpeciesDto>.BadRequest(invalidNameErrorMessage);
             }
-            catch (DbUpdateException exception)
-            {
-                if (exception.InnerException is SqlException sqlException &&
-                    sqlException.Number == SqlServerErrorNumbers.ViolateUniqueConstaint)
-                {
-                    return Response<SpeciesDto>.Failure(EResponseStatusCode.Conflict,
-                        "A species with the same name already exists.");
-                }
-                else
-                {
-                    //logging
 
-                    return Response<SpeciesDto>.Failure(EResponseStatusCode.InternalServerError,
-                        "An database error occurred while updating the species.");
-                }
-            }
-            catch (Exception exception)
-            {
-                // logging
-
-                return Response<SpeciesDto>.Failure(EResponseStatusCode.InternalServerError,
-                    "An unexpected error occurred while updating the species.");
-            }
+            return await UpdateAsync(id, speciesDto);
         }
-
         public async Task<Response<SpeciesDto>> DeleteSpeciesByIdAsync(int id)
         {
             try
@@ -148,28 +82,76 @@
 
                 if (species is null)
                 {
-                    return Response<SpeciesDto>.Failure(EResponseStatusCode.NotFound,
-                        $"No species was found with Id {id}");
+                    return Response<SpeciesDto>.NotFound(id);
                 }
 
                 _unitOfWork.Species.Delete(species);
                 await _unitOfWork.CommitAsync();
 
-                return Response<SpeciesDto>.Success(EResponseStatusCode.NoContent, null);
+                return Response<SpeciesDto>.NoContent();
             }
             catch (DbUpdateException exception)
-            {   
-                //logging
-
-                return Response<SpeciesDto>.Failure(EResponseStatusCode.InternalServerError,
-                    "An database error occurred while deleting the species.");
+            {
+                return ExceptionHandler.
+                    HandleDbUpdateException<SpeciesDto>(exception, DbOperations.Delete);
             }
             catch (Exception exception)
             {
-                // logging
+                return ExceptionHandler.HandleGenericException<SpeciesDto>(exception,DbOperations.Delete);
+            }
+        }
 
-                return Response<SpeciesDto>.Failure(EResponseStatusCode.InternalServerError,
-                    "An unexpected error occurred while deleting the species.");
+        // ----------- Private -----------
+        
+        private bool IsValidSpeciesName(string name)
+        {
+            return StringValidations.IsAllLetters(name);
+        }
+        private async Task<Response<SpeciesDto>> CreateAsync(SpeciesDto speciesDto)
+        {
+            var species = _mapper.Map<Species>(speciesDto);
+            await _unitOfWork.Species.AddAsync(species);
+
+            try
+            {
+                await _unitOfWork.CommitAsync();
+                return Response<SpeciesDto>.Created(speciesDto);
+            }
+            catch (DbUpdateException exception)
+            {
+                return ExceptionHandler.
+                    HandleDbUpdateException<SpeciesDto>(exception, DbOperations.Create, uniqueProperty);
+            }
+            catch (Exception exception)
+            {
+                return ExceptionHandler.HandleGenericException<SpeciesDto>(exception, DbOperations.Create);
+            }
+        }
+        private async Task<Response<SpeciesDto>> UpdateAsync(int id, SpeciesDto speciesDto)
+        {
+            try
+            {
+                var species = await _unitOfWork.Species.GetByIdAsync(id);
+                if (species is null)
+                {
+                    return Response<SpeciesDto>.NotFound(id);
+                }
+
+                species.Name = speciesDto.Name;
+
+                _unitOfWork.Species.Update(species);
+                await _unitOfWork.CommitAsync();
+
+                return Response<SpeciesDto>.Ok(speciesDto);
+            }
+            catch (DbUpdateException exception)
+            {
+                return ExceptionHandler.
+                    HandleDbUpdateException<SpeciesDto>(exception, DbOperations.Update, uniqueProperty);
+            }
+            catch (Exception exception)
+            {
+                return ExceptionHandler.HandleGenericException<SpeciesDto>(exception, DbOperations.Update);
             }
         }
     }
