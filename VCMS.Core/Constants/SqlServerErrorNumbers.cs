@@ -2,6 +2,6 @@
 {
     public static class SqlServerErrorNumbers
     {
-        public const int ViolateUniqueConstaint = 2601;
+        public const int ViolateUniqueConstraint = 2601;
     }
 }
