@@ -13,6 +13,10 @@
             {
                 return false;
             }
+            else if (string.IsNullOrWhiteSpace(str))
+            {
+                return false;
+            }
 
             return str.All(c => char.IsLetter(c) || char.IsWhiteSpace(c));
         }
@@ -28,8 +32,12 @@
             {
                 return false;
             }
-
-            return (str.All(c => char.IsNumber(c) || char.IsSymbol(c))) && (str.Length <= 15);
+            else if (string.IsNullOrWhiteSpace(str))
+            {
+                return false;
+            }
+            
+            return (str.All(c => char.IsNumber(c) || char.IsSymbol(c))) && (str.Length <= 15 && str.Length >= 11);
         }
     }
 }
