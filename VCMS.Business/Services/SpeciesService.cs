@@ -21,12 +21,12 @@
 
                 if (species is null)
                 {
-                    return Response<SpeciesDto>.NotFound(id);
+                    return ResponseFactory.NotFound<SpeciesDto>(id);
                 }
                 else
                 {
                     var speciesDto = _mapper.Map<SpeciesDto>(species);
-                    return Response<SpeciesDto>.Ok(speciesDto);
+                    return ResponseFactory.Ok(speciesDto);
                 }
             }
             catch (Exception exception)
@@ -42,12 +42,12 @@
                 var species = await _unitOfWork.Species.GetAllAsync();
                 if (species is null)
                 {
-                    return Response<IEnumerable<SpeciesDto>>.NotFound();
+                    return ResponseFactory.NotFound<IEnumerable<SpeciesDto>>();
                 }
                 else
                 {
                     var speciesDtos = _mapper.Map<IEnumerable<SpeciesDto>>(species);
-                    return Response<IEnumerable<SpeciesDto>>.Ok(speciesDtos);
+                    return ResponseFactory.Ok(speciesDtos);
                 }
             }
             catch (Exception exception)
@@ -60,7 +60,7 @@
         {
             if (!IsValidSpeciesName(speciesDto.Name))
             {
-                return Response<SpeciesDto>.BadRequest(invalidNameErrorMessage);
+                return ResponseFactory.BadRequest<SpeciesDto>(invalidNameErrorMessage);
             }
 
             return await CreateAsync(speciesDto);
@@ -69,7 +69,7 @@
         {
             if (!IsValidSpeciesName(speciesDto.Name))
             {
-                return Response<SpeciesDto>.BadRequest(invalidNameErrorMessage);
+                return ResponseFactory.BadRequest<SpeciesDto>(invalidNameErrorMessage);
             }
 
             return await UpdateAsync(id, speciesDto);
@@ -82,13 +82,13 @@
 
                 if (species is null)
                 {
-                    return Response<SpeciesDto>.NotFound(id);
+                    return ResponseFactory.NotFound<SpeciesDto>(id);
                 }
 
                 _unitOfWork.Species.Delete(species);
                 await _unitOfWork.CommitAsync();
 
-                return Response<SpeciesDto>.NoContent();
+                return ResponseFactory.NoContent<SpeciesDto>();
             }
             catch (DbUpdateException exception)
             {
@@ -115,7 +115,7 @@
             try
             {
                 await _unitOfWork.CommitAsync();
-                return Response<SpeciesDto>.Created(speciesDto);
+                return ResponseFactory.Created(speciesDto);
             }
             catch (DbUpdateException exception)
             {
@@ -134,7 +134,7 @@
                 var species = await _unitOfWork.Species.GetByIdAsync(id);
                 if (species is null)
                 {
-                    return Response<SpeciesDto>.NotFound(id);
+                    return ResponseFactory.NotFound<SpeciesDto>(id);
                 }
 
                 species.Name = speciesDto.Name;
@@ -142,7 +142,7 @@
                 _unitOfWork.Species.Update(species);
                 await _unitOfWork.CommitAsync();
 
-                return Response<SpeciesDto>.Ok(speciesDto);
+                return ResponseFactory.Ok(speciesDto);
             }
             catch (DbUpdateException exception)
             {

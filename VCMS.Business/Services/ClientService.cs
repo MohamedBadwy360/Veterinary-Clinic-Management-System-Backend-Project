@@ -23,11 +23,11 @@ namespace VCMS.Business.Services
                 var client = await _unitOfWork.Clients.GetByIdAsync(id);
                 if (client is null)
                 {
-                    return Response<ClientDto>.NotFound(id);
+                    return ResponseFactory.NotFound<ClientDto>(id);
                 }
 
                 var clientDto = _mapper.Map<ClientDto>(client);
-                return Response<ClientDto>.Ok(clientDto);
+                return ResponseFactory.Ok(clientDto);
             }
             catch (Exception exception)
             {
@@ -41,11 +41,11 @@ namespace VCMS.Business.Services
                 var clients = await _unitOfWork.Clients.GetAllAsync();
                 if (clients is null)
                 {
-                    return Response<IEnumerable<ClientDto>>.NotFound();
+                    return ResponseFactory.NotFound<IEnumerable<ClientDto>>();
                 }
 
                 var clientDtos = _mapper.Map<IEnumerable<ClientDto>>(clients);
-                return Response<IEnumerable<ClientDto>>.Ok(clientDtos);
+                return ResponseFactory.Ok(clientDtos);
             }
             catch (Exception exception)
             {
@@ -57,7 +57,7 @@ namespace VCMS.Business.Services
         {
             if (!IsValidClientDtoData(clientDto))
             {
-                return Response<ClientDto>.BadRequest(invalidNameOrPhoneNumberErrorMessage);
+                return ResponseFactory.BadRequest<ClientDto>(invalidNameOrPhoneNumberErrorMessage);
             }
 
             return await CreateAsync(clientDto);
@@ -66,7 +66,7 @@ namespace VCMS.Business.Services
         {
             if (!IsValidClientDtoData(clientDto))
             {
-                return Response<ClientDto>.BadRequest(invalidNameOrPhoneNumberErrorMessage);
+                return ResponseFactory.BadRequest<ClientDto>(invalidNameOrPhoneNumberErrorMessage);
             }
 
             return await UpdateAsync(id, clientDto);
@@ -78,13 +78,13 @@ namespace VCMS.Business.Services
                 var client = await _unitOfWork.Clients.GetByIdAsync(id);
                 if (client is null)
                 {
-                    return Response<ClientDto>.NotFound(id);
+                    return ResponseFactory.NotFound<ClientDto>(id);
                 }
 
                 _unitOfWork.Clients.Delete(client);
                 await _unitOfWork.CommitAsync();
 
-                return Response<ClientDto>.NoContent();
+                return ResponseFactory.NoContent<ClientDto>();
             }
             catch (DbUpdateException exception)
             {
@@ -121,7 +121,7 @@ namespace VCMS.Business.Services
             try
             {
                 await _unitOfWork.CommitAsync();
-                return Response<ClientDto>.Created(clientDto);
+                return ResponseFactory.Created(clientDto);
             }
             catch (DbUpdateException exception)
             {
@@ -141,7 +141,7 @@ namespace VCMS.Business.Services
                 var client = await _unitOfWork.Clients.GetByIdAsync(id);
                 if (client is null)
                 {
-                    return Response<ClientDto>.NotFound(id);
+                    return ResponseFactory.NotFound<ClientDto>(id);
                 }
 
                 _mapper.Map(clientDto, client);
@@ -149,7 +149,7 @@ namespace VCMS.Business.Services
                 _unitOfWork.Clients.Update(client);
                 await _unitOfWork.CommitAsync();
 
-                return Response<ClientDto>.Ok(clientDto);
+                return ResponseFactory.Ok(clientDto);
             }
             catch (DbUpdateException exception)
             {

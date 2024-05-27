@@ -18,11 +18,11 @@
                 var diagnosis = await _unitOfWork.Diagnostics.GetByIdAsync(id);
                 if (diagnosis is null)
                 {
-                    return Response<DiagnosisDto>.NotFound(id);
+                    return ResponseFactory.NotFound<DiagnosisDto>(id);
                 }
 
                 var diagnosisDto = _mapper.Map<DiagnosisDto>(diagnosis);
-                return Response<DiagnosisDto>.Ok(diagnosisDto);
+                return ResponseFactory.Ok(diagnosisDto);
             }
             catch (Exception exception)
             {
@@ -37,11 +37,11 @@
                 var diagnostics = await _unitOfWork.Diagnostics.GetAllAsync();
                 if (diagnostics is null)
                 {
-                    return Response<IEnumerable<DiagnosisDto>>.NotFound();
+                    return ResponseFactory.NotFound<IEnumerable<DiagnosisDto>>();
                 }
 
                 var diagnosticsDtos = _mapper.Map<IEnumerable<DiagnosisDto>>(diagnostics);
-                return Response<IEnumerable<DiagnosisDto>>.Ok(diagnosticsDtos);
+                return ResponseFactory.Ok(diagnosticsDtos);
             }
             catch (Exception exception)
             {
@@ -53,7 +53,7 @@
         {
             if (!!IsValidDiagnosisName(diagnosisDto.Name))
             {
-                return Response<DiagnosisDto>.BadRequest(inValidNameErrorMessage);
+                return ResponseFactory.BadRequest<DiagnosisDto>(inValidNameErrorMessage);
             }
 
             return await CreateAsync(diagnosisDto);
@@ -62,7 +62,7 @@
         {
             if (!IsValidDiagnosisName(diagnosisDto.Name))
             {
-                return Response<DiagnosisDto>.BadRequest(inValidNameErrorMessage);
+                return ResponseFactory.BadRequest<DiagnosisDto>(inValidNameErrorMessage);
             }
 
             return await UpdateAsync(id, diagnosisDto);
@@ -74,13 +74,13 @@
                 var diagnosis = await _unitOfWork.Diagnostics.GetByIdAsync(id);
                 if(diagnosis is null)
                 {
-                    return Response<DiagnosisDto>.NotFound(id);
+                    return ResponseFactory.NotFound<DiagnosisDto>(id);
                 }
 
                 _unitOfWork.Diagnostics.Delete(diagnosis);
                 await _unitOfWork.CommitAsync();
 
-                return Response<DiagnosisDto>.NoContent();
+                return ResponseFactory.NoContent<DiagnosisDto>();
             }
             catch (DbUpdateException exception)
             {
@@ -110,7 +110,7 @@
             try
             {
                 await _unitOfWork.CommitAsync();
-                return Response<DiagnosisDto>.Created(diagnosisDto);
+                return ResponseFactory.Created<DiagnosisDto>(diagnosisDto);
             }
             catch (DbUpdateException exception)
             {
@@ -130,7 +130,7 @@
                 var diagnosis = await _unitOfWork.Diagnostics.GetByIdAsync(id);
                 if (diagnosis is null)
                 {
-                    return Response<DiagnosisDto>.NotFound(id);
+                    return ResponseFactory.NotFound<DiagnosisDto>(id);
                 }
 
                 diagnosis.Name = diagnosisDto.Name;
@@ -138,7 +138,7 @@
                 _unitOfWork.Diagnostics.Update(diagnosis);
                 await _unitOfWork.CommitAsync();
 
-                return Response<DiagnosisDto>.Ok(diagnosisDto);
+                return ResponseFactory.Ok(diagnosisDto);
             }
             catch (DbUpdateException exception)
             {

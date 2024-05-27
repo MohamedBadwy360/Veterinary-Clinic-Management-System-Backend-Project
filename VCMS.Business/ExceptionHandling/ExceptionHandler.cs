@@ -11,13 +11,13 @@
             {
                 // logging exception
 
-                return Response<T>.Conflict($"An entity with the same {propertyName} already exists.");
+                return ResponseFactory.Conflict<T>($"An entity with the same {propertyName} already exists.");
             }
             else
             {
                 // logging exception
 
-                return Response<T>.InternalServerError($"A database error occurred while {operation} the entity.");
+                return ResponseFactory.InternalServerError<T>($"A database error occurred while {operation} the entity.");
             }
         }
 
@@ -26,7 +26,7 @@
         {
             // logging exception
 
-            return Response<T>.InternalServerError($"An unexpected error occurred while {operation} the entity.");
+            return ResponseFactory.InternalServerError<T>($"An unexpected error occurred while {operation} the entity.");
         }
     }
 }
