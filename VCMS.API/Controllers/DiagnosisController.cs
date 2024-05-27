@@ -94,7 +94,8 @@ namespace VCMS.API.Controllers
         public async Task<IActionResult> DeleteDiagnosis(int id)
         {
             var response = await _diagnosisService.DeleteDiagnosisByIdAsync(id);
-            return StatusCode((int)response.StatusCode, response);
+            return ((int)response.StatusCode == StatusCodes.Status204NoContent) ? NoContent() :
+                StatusCode((int)response.StatusCode, response);
         }
     }
 }

@@ -91,7 +91,8 @@
         public async Task<IActionResult> DeleteSpeciesById(int id)
         {
             var response = await _speciesService.DeleteSpeciesByIdAsync(id);
-            return StatusCode((int)response.StatusCode, response);
+            return ((int)response.StatusCode == StatusCodes.Status204NoContent) ? NoContent() : 
+                StatusCode((int)response.StatusCode, response);
         }
     }
 }
