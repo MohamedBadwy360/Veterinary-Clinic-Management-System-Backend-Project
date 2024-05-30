@@ -9,7 +9,7 @@ builder.Services.AddDbContext<VCMSDbContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultString"));
 });
 
-builder.Services.RegisterServices();
+builder.Services.RegisterDependencies();
 
 builder.Services.AddControllers(options =>
 {
@@ -20,16 +20,12 @@ builder.Services.AddControllers(options =>
         Location = ResponseCacheLocation.Any
     });
 });
+
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen(options =>
 {
     options.EnableAnnotations();
-    //options.SwaggerDoc("V1", new OpenApiInfo 
-    //{
-    //    Title = "Veterinary Clinic Management System API",
-    //    Version = "v1" 
-    //});
 });
 
 builder.Services.AddCors(options =>
@@ -51,6 +47,9 @@ if (app.Environment.IsDevelopment())
     app.UseSwagger();
     app.UseSwaggerUI();
 }
+
+// Custom Middleware
+app.UseExceptionHandlerMiddleware();
 
 app.UseHttpsRedirection();
 
