@@ -12,3 +12,7 @@ global using VCMS.Business.Mappings;
 global using VCMS.Core.Interfaces.IUnitOfWork;
 global using VCMS.Core.Interfaces.ServicesInterfaces;
 global using VCMS.Core.Dtos.ClientDtos;
+global using Microsoft.Data.SqlClient;
+global using VCMS.Core.Constants;
+global using VCMS.Core.Enums;
+global using VCMS.API.Middlewares;
