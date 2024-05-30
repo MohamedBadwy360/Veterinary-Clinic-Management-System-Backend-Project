@@ -44,7 +44,7 @@
             {
                 foreach (string include in includes)
                 {
-                    query.Include(include);
+                    query = query.Include(include);
                 }
             }
 
@@ -93,7 +93,7 @@
             {
                 foreach (string include in includes)
                 {
-                    query.Include(include);
+                    query = query.Include(include);
                 }
             }
 
