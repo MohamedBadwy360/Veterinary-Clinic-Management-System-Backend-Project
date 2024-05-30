@@ -18,7 +18,6 @@ namespace VCMS.API.Controllers
             Description = "Get a diagnosis by Id from database.")]
         [ProducesResponseType(typeof(Response<DiagnosisDto>), StatusCodes.Status200OK)]
         [ProducesResponseType(typeof(Response<DiagnosisDto>), StatusCodes.Status404NotFound)]
-        [ProducesResponseType(typeof(Response<DiagnosisDto>), StatusCodes.Status500InternalServerError)]
         [ResponseCache(CacheProfileName = "Any-180")]
         [HttpGet("{id:int}")]
         public async Task<IActionResult> GetDiagnosisById(int id)
@@ -32,7 +31,6 @@ namespace VCMS.API.Controllers
             Description = "Get all diagnostics from database.")]
         [ProducesResponseType(typeof(Response<IEnumerable<DiagnosisDto>>), StatusCodes.Status200OK)]
         [ProducesResponseType(typeof(Response<DiagnosisDto>), StatusCodes.Status404NotFound)]
-        [ProducesResponseType(typeof(Response<DiagnosisDto>), StatusCodes.Status500InternalServerError)]
         [ResponseCache(CacheProfileName = "Any-180")]
         [HttpGet]
         public async Task<IActionResult> GetAllDiagnosis()
@@ -45,10 +43,7 @@ namespace VCMS.API.Controllers
         [SwaggerOperation(Summary = "Create a diagnostics",
             Description = "Create a diagnostics in database.")]
         [ProducesResponseType(typeof(Response<DiagnosisDto>), StatusCodes.Status201Created)]
-        [ProducesResponseType(typeof(Response<DiagnosisDto>), StatusCodes.Status409Conflict)]
         [ProducesResponseType(typeof(Response<DiagnosisDto>), StatusCodes.Status400BadRequest)]
-        [ProducesResponseType(typeof(Response<DiagnosisDto>), StatusCodes.Status500InternalServerError)]
-        [ProducesResponseType(typeof(ValidationProblemDetails), StatusCodes.Status400BadRequest)]
         [ResponseCache(CacheProfileName = "NoCache")]
         [HttpPost]
         public async Task<IActionResult> CreateDiagnosis(DiagnosisDto diagnosisDto)
@@ -66,10 +61,7 @@ namespace VCMS.API.Controllers
         [SwaggerOperation(Summary = "Update a diagnostics",
             Description = "Update a diagnostics in database.")]
         [ProducesResponseType(typeof(Response<DiagnosisDto>), StatusCodes.Status200OK)]
-        [ProducesResponseType(typeof(Response<DiagnosisDto>), StatusCodes.Status409Conflict)]
         [ProducesResponseType(typeof(Response<DiagnosisDto>), StatusCodes.Status400BadRequest)]
-        [ProducesResponseType(typeof(Response<DiagnosisDto>), StatusCodes.Status500InternalServerError)]
-        [ProducesResponseType(typeof(ValidationProblemDetails), StatusCodes.Status400BadRequest)]
         [ResponseCache(CacheProfileName = "NoCache")]
         [HttpPut]
         public async Task<IActionResult>UpdateDiagnosis(int id, DiagnosisDto diagnosisDto)
@@ -88,7 +80,6 @@ namespace VCMS.API.Controllers
             Description = "Delete a diagnostics in database.")]
         [ProducesResponseType(StatusCodes.Status204NoContent)]
         [ProducesResponseType(typeof(Response<DiagnosisDto>), StatusCodes.Status404NotFound)]
-        [ProducesResponseType(typeof(Response<DiagnosisDto>), StatusCodes.Status500InternalServerError)]
         [ResponseCache(CacheProfileName = "NoCache")]
         [HttpDelete("{id:int}")]
         public async Task<IActionResult> DeleteDiagnosis(int id)

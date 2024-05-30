@@ -4,11 +4,11 @@ namespace VCMS.API.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class ClientController : ControllerBase
+    public class ClientsController : ControllerBase
     {
         private readonly IClientService _clientService;
 
-        public ClientController(IClientService clientService)
+        public ClientsController(IClientService clientService)
         {
             _clientService = clientService;
         }
@@ -19,7 +19,6 @@ namespace VCMS.API.Controllers
             Description = "Get client by Id from database.")]
         [ProducesResponseType(typeof(Response<ClientDto>), StatusCodes.Status200OK)]
         [ProducesResponseType(typeof(Response<ClientDto>), StatusCodes.Status404NotFound)]
-        [ProducesResponseType(typeof(Response<ClientDto>), StatusCodes.Status500InternalServerError)]
         [ResponseCache(CacheProfileName = "Any-180")]
         [HttpGet("{id:int}")]
         public async Task<IActionResult> GetClientById(int id)
@@ -33,7 +32,6 @@ namespace VCMS.API.Controllers
             Description = "Get all clients from database.")]
         [ProducesResponseType(typeof(Response<IEnumerable<ClientDto>>), StatusCodes.Status200OK)]
         [ProducesResponseType(typeof(Response<IEnumerable<ClientDto>>), StatusCodes.Status404NotFound)]
-        [ProducesResponseType(typeof(Response<IEnumerable<ClientDto>>), StatusCodes.Status500InternalServerError)]
         [ResponseCache(CacheProfileName = "Any-180")]
         [HttpGet]
         public async Task<IActionResult> GetAllClients()
@@ -47,8 +45,6 @@ namespace VCMS.API.Controllers
             Description = "Create client in the database.")]
         [ProducesResponseType(typeof(Response<ClientDto>), StatusCodes.Status201Created)]
         [ProducesResponseType(typeof(Response<ClientDto>), StatusCodes.Status400BadRequest)]
-        [ProducesResponseType(typeof(Response<ClientDto>), StatusCodes.Status500InternalServerError)]
-        [ProducesResponseType(typeof(Response<ValidationProblemDetails>), StatusCodes.Status400BadRequest)]
         [ResponseCache(CacheProfileName = "NoCache")]
         [HttpPost]
         public async Task<IActionResult> CreateClient(ClientDto clientDto)
@@ -68,8 +64,6 @@ namespace VCMS.API.Controllers
         [ProducesResponseType(typeof(Response<ClientDto>), StatusCodes.Status200OK)]
         [ProducesResponseType(typeof(Response<ClientDto>), StatusCodes.Status400BadRequest)]
         [ProducesResponseType(typeof(Response<ClientDto>), StatusCodes.Status404NotFound)]
-        [ProducesResponseType(typeof(Response<ClientDto>), StatusCodes.Status500InternalServerError)]
-        [ProducesResponseType(typeof(Response<ValidationProblemDetails>), StatusCodes.Status400BadRequest)]
         [ResponseCache(CacheProfileName = "NoCache")]
         [HttpPut]
         public async Task<IActionResult> UpdateClient(int id, ClientDto clientDto)
@@ -88,9 +82,8 @@ namespace VCMS.API.Controllers
             Description = "Delete client from the database.")]
         [ProducesResponseType(StatusCodes.Status204NoContent)]
         [ProducesResponseType(typeof(Response<ClientDto>), StatusCodes.Status404NotFound)]
-        [ProducesResponseType(typeof(Response<ClientDto>), StatusCodes.Status500InternalServerError)]
         [ResponseCache(CacheProfileName = "NoCache")]
-        [HttpDelete]
+        [HttpDelete("{id:int}")]
         public async Task<IActionResult> DeleteClient(int id)
         {
             var response = await _clientService.DeleteClientByIdAsync(id);
