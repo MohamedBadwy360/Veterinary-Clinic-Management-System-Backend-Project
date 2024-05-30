@@ -13,143 +13,78 @@
 
         public async Task<Response<DiagnosisDto>> GetDiagnosisByIdAsync(int id)
         {
-            try
+            var diagnosis = await _unitOfWork.Diagnostics.GetByIdAsync(id);
+            if (diagnosis is null)
             {
-                var diagnosis = await _unitOfWork.Diagnostics.GetByIdAsync(id);
-                if (diagnosis is null)
-                {
-                    return ResponseFactory.NotFound<DiagnosisDto>(id);
-                }
+                return ResponseFactory.NotFound<DiagnosisDto>(id);
+            }
 
-                var diagnosisDto = _mapper.Map<DiagnosisDto>(diagnosis);
-                return ResponseFactory.Ok(diagnosisDto);
-            }
-            catch (Exception exception)
-            {
-                return ExceptionHandler.
-                    HandleGenericException<DiagnosisDto>(exception, DbOperations.Retrieve);
-            }
+            var diagnosisDto = _mapper.Map<DiagnosisDto>(diagnosis);
+            return ResponseFactory.Ok(diagnosisDto);
         }
         public async Task<Response<IEnumerable<DiagnosisDto>>> GetAllDiagnosisAsync()
         {
-            try
+            var diagnostics = await _unitOfWork.Diagnostics.GetAllAsync();
+            if (diagnostics is null)
             {
-                var diagnostics = await _unitOfWork.Diagnostics.GetAllAsync();
-                if (diagnostics is null)
-                {
-                    return ResponseFactory.NotFound<IEnumerable<DiagnosisDto>>();
-                }
+                return ResponseFactory.NotFound<IEnumerable<DiagnosisDto>>();
+            }
 
-                var diagnosticsDtos = _mapper.Map<IEnumerable<DiagnosisDto>>(diagnostics);
-                return ResponseFactory.Ok(diagnosticsDtos);
-            }
-            catch (Exception exception)
-            {
-                return ExceptionHandler.
-                    HandleGenericException<IEnumerable<DiagnosisDto>>(exception, DbOperations.Retrieve);
-            }
+            var diagnosticsDtos = _mapper.Map<IEnumerable<DiagnosisDto>>(diagnostics);
+            return ResponseFactory.Ok(diagnosticsDtos);
         }
         public async Task<Response<DiagnosisDto>> CreateDiagnosisAsync(DiagnosisDto diagnosisDto)
         {
             if (!!IsValidDiagnosisName(diagnosisDto.Name))
             {
-                return ResponseFactory.BadRequest<DiagnosisDto>(inValidNameErrorMessage);
+                return ResponseFactory.BadRequest<DiagnosisDto>("You inserted incorrect letter in diagnosis name.");
             }
 
-            return await CreateAsync(diagnosisDto);
+            Diagnosis diagnosis = _mapper.Map<Diagnosis>(diagnosisDto);
+
+            await _unitOfWork.Diagnostics.AddAsync(diagnosis);
+            await _unitOfWork.CommitAsync();
+
+            return ResponseFactory.Created(diagnosisDto);
         }
         public async Task<Response<DiagnosisDto>> UpdateDiagnosisByIdAsync(int id, DiagnosisDto diagnosisDto)
         {
             if (!IsValidDiagnosisName(diagnosisDto.Name))
             {
-                return ResponseFactory.BadRequest<DiagnosisDto>(inValidNameErrorMessage);
+                return ResponseFactory.BadRequest<DiagnosisDto>("You inserted incorrect letter in diagnosis name.");
             }
 
-            return await UpdateAsync(id, diagnosisDto);
+            var diagnosis = await _unitOfWork.Diagnostics.GetByIdAsync(id);
+            if (diagnosis is null)
+            {
+                return ResponseFactory.NotFound<DiagnosisDto>(id);
+            }
+
+            diagnosis.Name = diagnosisDto.Name;
+
+            _unitOfWork.Diagnostics.Update(diagnosis);
+            await _unitOfWork.CommitAsync();
+
+            return ResponseFactory.Ok(diagnosisDto);
         }
         public async Task<Response<DiagnosisDto>> DeleteDiagnosisByIdAsync(int id)
         {
-            try
+            var diagnosis = await _unitOfWork.Diagnostics.GetByIdAsync(id);
+            if (diagnosis is null)
             {
-                var diagnosis = await _unitOfWork.Diagnostics.GetByIdAsync(id);
-                if(diagnosis is null)
-                {
-                    return ResponseFactory.NotFound<DiagnosisDto>(id);
-                }
+                return ResponseFactory.NotFound<DiagnosisDto>(id);
+            }
 
-                _unitOfWork.Diagnostics.Delete(diagnosis);
-                await _unitOfWork.CommitAsync();
+            _unitOfWork.Diagnostics.Delete(diagnosis);
+            await _unitOfWork.CommitAsync();
 
-                return ResponseFactory.NoContent<DiagnosisDto>();
-            }
-            catch (DbUpdateException exception)
-            {
-                return ExceptionHandler.
-                    HandleDbUpdateException<DiagnosisDto>(exception, DbOperations.Delete);
-            }
-            catch (Exception exception)
-            {
-                return ExceptionHandler.
-                    HandleGenericException<DiagnosisDto>(exception, DbOperations.Delete);
-            }
+            return ResponseFactory.NoContent<DiagnosisDto>();
         }
 
         // ------------ Private ------------
-
-        private const string uniqueProperty = "name";
-        private const string inValidNameErrorMessage = "You inserted incorrect letter in diagnosis name.";
         private bool IsValidDiagnosisName(string name)
         {
             return StringValidations.IsAllLetters(name);
-        }
-        private async Task<Response<DiagnosisDto>> CreateAsync(DiagnosisDto diagnosisDto)
-        {
-            Diagnosis diagnosis = _mapper.Map<Diagnosis>(diagnosisDto);
-            await _unitOfWork.Diagnostics.AddAsync(diagnosis);
-
-            try
-            {
-                await _unitOfWork.CommitAsync();
-                return ResponseFactory.Created<DiagnosisDto>(diagnosisDto);
-            }
-            catch (DbUpdateException exception)
-            {
-                return ExceptionHandler.
-                    HandleDbUpdateException<DiagnosisDto>(exception, DbOperations.Create, uniqueProperty);
-            }
-            catch (Exception exception)
-            {
-                return ExceptionHandler.
-                    HandleGenericException<DiagnosisDto>(exception, DbOperations.Create);
-            }
-        }
-        private async Task<Response<DiagnosisDto>> UpdateAsync(int id, DiagnosisDto diagnosisDto)
-        {
-            try
-            {
-                var diagnosis = await _unitOfWork.Diagnostics.GetByIdAsync(id);
-                if (diagnosis is null)
-                {
-                    return ResponseFactory.NotFound<DiagnosisDto>(id);
-                }
-
-                diagnosis.Name = diagnosisDto.Name;
-
-                _unitOfWork.Diagnostics.Update(diagnosis);
-                await _unitOfWork.CommitAsync();
-
-                return ResponseFactory.Ok(diagnosisDto);
-            }
-            catch (DbUpdateException exception)
-            {
-                return ExceptionHandler.
-                    HandleDbUpdateException<DiagnosisDto>(exception, DbOperations.Update, uniqueProperty);
-            }
-            catch (Exception exception)
-            {
-                return ExceptionHandler.
-                    HandleGenericException<DiagnosisDto>(exception, DbOperations.Update);
-            }
         }
     }
 }
