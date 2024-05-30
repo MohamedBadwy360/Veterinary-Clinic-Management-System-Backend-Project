@@ -2,7 +2,7 @@
 
 public class ResponseFactory
 {
-    public static Response<T> CreateResponse<T>(EResponseStatusCode statusCode, T data = null,
+    public static Response<T> Create<T>(EResponseStatusCode statusCode, T data = null,
         string message = null) where T : class
     {
         return new Response<T>
