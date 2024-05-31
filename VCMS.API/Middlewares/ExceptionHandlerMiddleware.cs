@@ -28,14 +28,15 @@
         }
 
 
-        private static Task HandleDatabaseUpdateExceptionAsync(HttpContext httpContext, DbUpdateException exception)
+        private static Task HandleDatabaseUpdateExceptionAsync(HttpContext httpContext,
+            DbUpdateException exception)
         {
             if (exception.InnerException is SqlException sqlException &&
                     sqlException.Number == SqlServerErrorNumbers.ViolateUniqueConstraint)
             {
                 httpContext.Response.StatusCode = StatusCodes.Status409Conflict;
 
-                var response = ResponseFactory.Create<object>(EResponseStatusCode.Conflict,
+                var response = ResponseFactory.Create<Exception>(EResponseStatusCode.Conflict,
                     message: "A database update error occurred because an entity with same data exists.");
 
                 return httpContext.Response.WriteAsJsonAsync(response);
@@ -44,7 +45,7 @@
             {
                 httpContext.Response.StatusCode = StatusCodes.Status500InternalServerError;
 
-                var response = ResponseFactory.Create<object>(EResponseStatusCode.InternalServerError,
+                var response = ResponseFactory.Create<Exception>(EResponseStatusCode.InternalServerError,
                     message: "A database error occurred.");
 
                 return httpContext.Response.WriteAsJsonAsync(response);
