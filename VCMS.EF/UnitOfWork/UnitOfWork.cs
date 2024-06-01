@@ -13,7 +13,7 @@
             Diagnostics = new BaseRepository<Diagnosis>(_context);
             Doctors = new BaseRepository<Doctor>(_context);
             Medications = new BaseRepository<Medication>(_context);
-            Patients = new BaseRepository<Patient>(_context);
+            Patients = new PatientRepository(_context);
             PrescribedMeds = new BaseRepository<PrescribedMeds>(_context);
             Prescriptions = new BaseRepository<Prescription>(_context);
             Receipts = new BaseRepository<Receipt>(_context);
@@ -25,7 +25,7 @@
         public IBaseRepository<Diagnosis> Diagnostics { get; private set; }
         public IBaseRepository<Doctor> Doctors { get; private set; }
         public IBaseRepository<Medication> Medications { get; private set; }
-        public IBaseRepository<Patient> Patients { get; private set; }
+        public IPatientRepository Patients { get; private set; }
         public IBaseRepository<PrescribedMeds> PrescribedMeds { get; private set; }
         public IBaseRepository<Prescription> Prescriptions { get; private set; }
         public IBaseRepository<Receipt> Receipts { get; private set; }
