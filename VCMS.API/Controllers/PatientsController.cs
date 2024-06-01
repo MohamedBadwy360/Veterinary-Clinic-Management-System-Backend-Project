@@ -1,8 +1,4 @@
-﻿using Microsoft.Identity.Client;
-using System.Net.WebSockets;
-using VCMS.Core.Dtos.PatientDtos;
-
-namespace VCMS.API.Controllers
+﻿namespace VCMS.API.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]

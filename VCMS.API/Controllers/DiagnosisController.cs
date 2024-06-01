@@ -1,6 +1,4 @@
-﻿using VCMS.Core.Dtos.DiagnosisDtos;
-
-namespace VCMS.API.Controllers
+﻿namespace VCMS.API.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]

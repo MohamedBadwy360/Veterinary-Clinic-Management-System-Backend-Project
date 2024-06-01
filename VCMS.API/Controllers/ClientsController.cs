@@ -1,6 +1,4 @@
-﻿using Microsoft.AspNetCore.Mvc.Formatters;
-
-namespace VCMS.API.Controllers
+﻿namespace VCMS.API.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
