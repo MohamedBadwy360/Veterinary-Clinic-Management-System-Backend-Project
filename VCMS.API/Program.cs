@@ -9,6 +9,7 @@ builder.Services.AddDbContext<VCMSDbContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultString"));
 });
 
+// Register dependencies
 builder.Services.RegisterDependencies();
 
 builder.Services.AddControllers(options =>
