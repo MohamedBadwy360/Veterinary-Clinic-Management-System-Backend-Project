@@ -2,7 +2,7 @@
 
 namespace VCMS.Business.Services
 {
-    public class ClientsService : IClientService
+    public class ClientsService : IClientsService
     {
         private readonly IUnitOfWork _unitOfWork;
         private readonly IMapper _mapper;
