@@ -7,7 +7,7 @@
         IBaseRepository<Diagnosis> Diagnostics { get; }
         IBaseRepository<Doctor> Doctors { get; }
         IBaseRepository<Medication> Medications { get; }
-        IBaseRepository<Patient> Patients { get; }
+        IPatientRepository Patients { get; }
         IBaseRepository<PrescribedMeds> PrescribedMeds { get; }
         IBaseRepository<Prescription> Prescriptions { get; }
         IBaseRepository<Receipt> Receipts { get; }

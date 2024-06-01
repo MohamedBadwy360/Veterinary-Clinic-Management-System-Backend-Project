@@ -6,9 +6,9 @@ namespace VCMS.API.Controllers
     [ApiController]
     public class ClientsController : ControllerBase
     {
-        private readonly IClientService _clientService;
+        private readonly IClientsService _clientService;
 
-        public ClientsController(IClientService clientService)
+        public ClientsController(IClientsService clientService)
         {
             _clientService = clientService;
         }

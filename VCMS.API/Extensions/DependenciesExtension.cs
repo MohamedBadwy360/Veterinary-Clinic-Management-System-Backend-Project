@@ -10,8 +10,8 @@
 
             services.AddScoped<ISpeciesService, SpeciesService>();
             services.AddScoped<IDiagnosisService, DiagnosisService>();
-            services.AddScoped<IClientService, ClientsService>();
-            services.AddScoped<IPatientService, PatientsService>();
+            services.AddScoped<IClientsService, ClientsService>();
+            services.AddScoped<IPatientsService, PatientsService>();
         }
     }
 }

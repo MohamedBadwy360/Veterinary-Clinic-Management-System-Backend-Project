@@ -1,6 +1,6 @@
 ﻿namespace VCMS.Core.Interfaces.ServicesInterfaces
 {
-    public interface IClientService
+    public interface IClientsService
     {
         Task<Response<ClientDto>> GetClientByIdAsync(int id);
         Task<Response<IEnumerable<ClientDto>>> GetAllClientAsync();

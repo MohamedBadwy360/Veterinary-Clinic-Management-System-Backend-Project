@@ -41,6 +41,16 @@
 
                 return httpContext.Response.WriteAsJsonAsync(response);
             }
+            else if(exception.InnerException is SqlException sqlEx &&
+                    sqlEx.Number == SqlServerErrorNumbers.ViolateForeignKeyConstraint)
+            {
+                httpContext.Response.StatusCode = StatusCodes.Status400BadRequest;
+
+                var response = ResponseFactory.Create<Exception>(EResponseStatusCode.BadRequest,
+                    message: "A database update error occurred because violating foriegn key constraint.");
+
+                return httpContext.Response.WriteAsJsonAsync(response);
+            }
             else
             {
                 httpContext.Response.StatusCode = StatusCodes.Status500InternalServerError;
