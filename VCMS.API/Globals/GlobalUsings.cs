@@ -16,3 +16,6 @@ global using Microsoft.Data.SqlClient;
 global using VCMS.Core.Constants;
 global using VCMS.Core.Enums;
 global using VCMS.API.Middlewares;
+global using VCMS.Core.Dtos.PatientDtos;
+global using VCMS.Core.Dtos.DiagnosisDtos;
+global using VCMS.Core.Dtos.DoctorDtos;
