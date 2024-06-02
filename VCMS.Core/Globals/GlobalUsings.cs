@@ -10,3 +10,4 @@ global using VCMS.Core.Dtos.DiagnosisDtos;
 global using VCMS.Core.Dtos.SpeciesDtos;
 global using VCMS.Core.Interfaces.DbInterfaces;
 global using VCMS.Core.Dtos.PatientDtos;
+global using VCMS.Core.Dtos.DoctorDtos;
