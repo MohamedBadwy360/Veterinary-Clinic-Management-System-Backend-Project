@@ -66,7 +66,7 @@
         {
             httpContext.Response.StatusCode = StatusCodes.Status500InternalServerError;
 
-            var response = ResponseFactory.Create<object>(EResponseStatusCode.InternalServerError,
+            var response = ResponseFactory.Create<Exception>(EResponseStatusCode.InternalServerError,
                 message: "An unexpected error occurred.");
 
             return httpContext.Response.WriteAsJsonAsync(response);
