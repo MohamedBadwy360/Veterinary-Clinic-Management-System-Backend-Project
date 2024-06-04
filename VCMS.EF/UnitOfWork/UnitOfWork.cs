@@ -8,7 +8,7 @@
         {
             _context = context;
 
-            Cases = new BaseRepository<Case>(_context);
+            Cases = new CaseRepository(_context);
             Clients = new BaseRepository<Client>(_context);
             Diagnostics = new BaseRepository<Diagnosis>(_context);
             Doctors = new BaseRepository<Doctor>(_context);
@@ -20,7 +20,7 @@
             Species = new BaseRepository<Species>(_context);
         }
 
-        public IBaseRepository<Case> Cases { get; private set; }
+        public ICaseRepository Cases { get; private set; }
         public IBaseRepository<Client> Clients { get; private set; }
         public IBaseRepository<Diagnosis> Diagnostics { get; private set; }
         public IBaseRepository<Doctor> Doctors { get; private set; }

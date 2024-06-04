@@ -19,3 +19,4 @@ global using VCMS.API.Middlewares;
 global using VCMS.Core.Dtos.PatientDtos;
 global using VCMS.Core.Dtos.DiagnosisDtos;
 global using VCMS.Core.Dtos.DoctorDtos;
+global using VCMS.Core.Dtos.CaseDtos;

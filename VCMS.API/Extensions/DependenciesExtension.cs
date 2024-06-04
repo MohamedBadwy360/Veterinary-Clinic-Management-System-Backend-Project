@@ -13,6 +13,7 @@
             services.AddScoped<IClientsService, ClientsService>();
             services.AddScoped<IPatientsService, PatientsService>();
             services.AddScoped<IDoctorsService, DoctorsService>();
+            services.AddScoped<ICasesService, CasesService>();
         }
     }
 }

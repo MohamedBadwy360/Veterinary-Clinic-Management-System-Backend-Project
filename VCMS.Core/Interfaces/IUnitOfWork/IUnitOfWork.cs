@@ -2,7 +2,7 @@
 {
     public interface IUnitOfWork : IDisposable
     {
-        IBaseRepository<Case> Cases { get; }
+        ICaseRepository Cases { get; }
         IBaseRepository<Client> Clients { get; }
         IBaseRepository<Diagnosis> Diagnostics { get; }
         IBaseRepository<Doctor> Doctors { get; }
