@@ -14,3 +14,5 @@ global using VCMS.Core.Dtos.PatientDtos;
 global using VCMS.Core.Dtos.CaseDtos;
 global using VCMS.Core.Dtos.PrescribedMedsDtos;
 global using VCMS.Core.Dtos.PrescriptionDtos;
+global using Microsoft.Data.SqlClient;
+global using System.Data;

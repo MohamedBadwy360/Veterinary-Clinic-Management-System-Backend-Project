@@ -27,6 +27,45 @@
             base.OnModelCreating(modelBuilder);
 
             modelBuilder.ApplyConfigurationsFromAssembly(typeof(SpeciesConfiguration).Assembly);
+
+            
         }
+
+        /// <summary>
+        /// Get receipt's total price by prescriptionId
+        /// </summary>
+        /// <param name="prescriptionId">The Id of the prescription</param>
+        /// <returns>Total price of the prescription</returns>
+        public async Task<decimal> GetReceiptTotalPriceByPrescriptionId(int prescriptionId)
+        {
+            SqlParameter prescriptionIdParamter = new SqlParameter
+            {
+                ParameterName = "@prescriptionId",
+                SqlDbType = SqlDbType.Int,
+                Value = prescriptionId
+            };
+
+            SqlParameter receiptTotalPriceParam = new SqlParameter
+            {
+                ParameterName = "@receiptTotalPrice",
+                SqlDbType = SqlDbType.Decimal,
+                Direction = ParameterDirection.Output,
+                Precision = 8,
+                Scale = 2
+            };
+
+            await Database.ExecuteSqlRawAsync(
+                "EXEC dbo.GetReceiptTotalPriceByPrescriptionIdProcedure @prescriptionId, @receiptTotalPrice OUTPUT",
+                prescriptionIdParamter,
+                receiptTotalPriceParam);
+
+            return (decimal)receiptTotalPriceParam.Value;
+        }
+
+        //[DbFunction(Name = "GetReceiptTotalPriceByPrescriptionId", Schema = "dbo")]
+        //public static decimal GetReceiptTotalPriceByPrescriptionId(int prescriptionId)
+        //{
+        //    throw new NotImplementedException();
+        //}
     }
 }

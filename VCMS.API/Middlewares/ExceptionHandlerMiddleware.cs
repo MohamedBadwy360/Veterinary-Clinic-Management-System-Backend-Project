@@ -56,7 +56,7 @@
                 httpContext.Response.StatusCode = StatusCodes.Status500InternalServerError;
 
                 var response = ResponseFactory.Create<Exception>(EResponseStatusCode.InternalServerError,
-                    message: $"{exception.Message}. {exception.InnerException.Message}" /*"A database error occurred."*/);
+                    message: $"{exception?.Message}. {exception?.InnerException?.Message}" /*"A database error occurred."*/);
 
                 return httpContext.Response.WriteAsJsonAsync(response);
             }
@@ -67,7 +67,7 @@
             httpContext.Response.StatusCode = StatusCodes.Status500InternalServerError;
 
             var response = ResponseFactory.Create<Exception>(EResponseStatusCode.InternalServerError,
-                message: $"{exception.Message}. {exception.InnerException.Message}"/*"An unexpected error occurred."*/);
+                message: $"{exception?.Message}. {exception?.InnerException?.Message}"/*"An unexpected error occurred."*/);
 
             return httpContext.Response.WriteAsJsonAsync(response);
         }
