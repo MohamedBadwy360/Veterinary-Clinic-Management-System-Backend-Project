@@ -14,3 +14,4 @@ global using VCMS.Core.Dtos.CaseDtos;
 global using VCMS.Core.Dtos.MedicationDtos;
 global using VCMS.Core.Dtos.PrescribedMedsDtos;
 global using VCMS.Core.Dtos.PrescriptionDtos;
+global using VCMS.Core.Dtos.ReceiptDtos;
