@@ -15,6 +15,7 @@
             services.AddScoped<IDoctorsService, DoctorsService>();
             services.AddScoped<ICasesService, CasesService>();
             services.AddScoped<IMedicationsService, MedicationsService>();
+            services.AddScoped<IPrescriptionsService, PrescriptionsService>();
         }
     }
 }
