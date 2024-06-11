@@ -12,3 +12,5 @@ global using VCMS.Core.Interfaces.IUnitOfWork;
 global using VCMS.EF.Repositories;
 global using VCMS.Core.Dtos.PatientDtos;
 global using VCMS.Core.Dtos.CaseDtos;
+global using VCMS.Core.Dtos.PrescribedMedsDtos;
+global using VCMS.Core.Dtos.PrescriptionDtos;

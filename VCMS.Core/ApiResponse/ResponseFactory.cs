@@ -25,6 +25,11 @@ public class ResponseFactory
         return Failure<T>(EResponseStatusCode.NotFound,
             $"Entity with Id {id} is not found.");
     }
+    public static Response<T> NotFound<T>(string message)
+        where T : class
+    {
+        return Failure<T>(EResponseStatusCode.NotFound, message);
+    }
     public static Response<T> Ok<T>(T data)
         where T : class
     {

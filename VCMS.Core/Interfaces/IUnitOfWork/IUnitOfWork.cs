@@ -9,7 +9,7 @@
         IBaseRepository<Medication> Medications { get; }
         IPatientRepository Patients { get; }
         IBaseRepository<PrescribedMeds> PrescribedMeds { get; }
-        IBaseRepository<Prescription> Prescriptions { get; }
+        IPrescriptionRespository Prescriptions { get; }
         IBaseRepository<Receipt> Receipts { get; }
         IBaseRepository<Species> Species { get; }
 

@@ -21,3 +21,5 @@ global using VCMS.Core.Dtos.DiagnosisDtos;
 global using VCMS.Core.Dtos.DoctorDtos;
 global using VCMS.Core.Dtos.CaseDtos;
 global using VCMS.Core.Dtos.MedicationDtos;
+global using VCMS.Core.Dtos.PrescriptionDtos;
+global using VCMS.Core.Models;

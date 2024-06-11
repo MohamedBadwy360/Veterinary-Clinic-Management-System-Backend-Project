@@ -37,7 +37,7 @@
                 httpContext.Response.StatusCode = StatusCodes.Status409Conflict;
 
                 var response = ResponseFactory.Create<Exception>(EResponseStatusCode.Conflict,
-                    message: "A database update error occurred because an entity with same data exists.");
+                    message: sqlException.Message /*"A database update error occurred because an entity with same data exists."*/);
 
                 return httpContext.Response.WriteAsJsonAsync(response);
             }
@@ -47,7 +47,7 @@
                 httpContext.Response.StatusCode = StatusCodes.Status400BadRequest;
 
                 var response = ResponseFactory.Create<Exception>(EResponseStatusCode.BadRequest,
-                    message: "A database update error occurred because violating foriegn key constraint.");
+                    message: sqlEx.Message /*"A database update error occurred because violating foriegn key constraint."*/);
 
                 return httpContext.Response.WriteAsJsonAsync(response);
             }
@@ -56,7 +56,7 @@
                 httpContext.Response.StatusCode = StatusCodes.Status500InternalServerError;
 
                 var response = ResponseFactory.Create<Exception>(EResponseStatusCode.InternalServerError,
-                    message: "A database error occurred.");
+                    message: $"{exception.Message}. {exception.InnerException.Message}" /*"A database error occurred."*/);
 
                 return httpContext.Response.WriteAsJsonAsync(response);
             }
@@ -67,7 +67,7 @@
             httpContext.Response.StatusCode = StatusCodes.Status500InternalServerError;
 
             var response = ResponseFactory.Create<Exception>(EResponseStatusCode.InternalServerError,
-                message: "An unexpected error occurred.");
+                message: $"{exception.Message}. {exception.InnerException.Message}"/*"An unexpected error occurred."*/);
 
             return httpContext.Response.WriteAsJsonAsync(response);
         }
