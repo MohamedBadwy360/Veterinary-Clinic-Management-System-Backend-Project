@@ -24,6 +24,7 @@
                 .IsRequired();
 
             builder.HasIndex(pm => new { pm.PrescriptionId, pm.MedicationId });
+            builder.HasIndex(pm => pm.PrescriptionId);
 
             builder.HasData(SeedData.LoadPrescribedMeds());
 
