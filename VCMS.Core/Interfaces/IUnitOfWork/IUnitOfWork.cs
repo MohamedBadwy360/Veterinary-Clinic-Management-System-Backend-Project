@@ -10,7 +10,7 @@
         IPatientRepository Patients { get; }
         IBaseRepository<PrescribedMeds> PrescribedMeds { get; }
         IPrescriptionRespository Prescriptions { get; }
-        IBaseRepository<Receipt> Receipts { get; }
+        IReceiptRepository Receipts { get; }
         IBaseRepository<Species> Species { get; }
 
         Task<int> CommitAsync();

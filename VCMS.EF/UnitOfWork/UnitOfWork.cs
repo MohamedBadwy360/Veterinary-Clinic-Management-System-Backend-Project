@@ -16,7 +16,7 @@
             Patients = new PatientRepository(_context);
             PrescribedMeds = new BaseRepository<PrescribedMeds>(_context);
             Prescriptions = new PrescriptionRepository(_context);
-            Receipts = new BaseRepository<Receipt>(_context);
+            Receipts = new ReceiptRepository(_context);
             Species = new BaseRepository<Species>(_context);
         }
 
@@ -28,7 +28,7 @@
         public IPatientRepository Patients { get; private set; }
         public IBaseRepository<PrescribedMeds> PrescribedMeds { get; private set; }
         public IPrescriptionRespository Prescriptions { get; private set; }
-        public IBaseRepository<Receipt> Receipts { get; private set; }
+        public IReceiptRepository Receipts { get; private set; }
         public IBaseRepository<Species> Species { get; private set; }
 
         public async Task<int> CommitAsync()
