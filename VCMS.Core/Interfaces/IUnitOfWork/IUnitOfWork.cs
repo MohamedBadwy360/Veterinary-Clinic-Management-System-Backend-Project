@@ -12,6 +12,7 @@
         IPrescriptionRespository Prescriptions { get; }
         IReceiptRepository Receipts { get; }
         IBaseRepository<Species> Species { get; }
+        IAuthRepository Authentication { get; }
 
         Task<int> CommitAsync();
     }

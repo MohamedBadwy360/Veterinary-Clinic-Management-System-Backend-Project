@@ -1,6 +1,6 @@
 ﻿namespace VCMS.EF.Data
 {
-    public class VCMSDbContext : DbContext
+    public class VCMSDbContext : IdentityDbContext<ApplicationUser>
     {
         public VCMSDbContext(DbContextOptions<VCMSDbContext> options)
             : base(options) { }

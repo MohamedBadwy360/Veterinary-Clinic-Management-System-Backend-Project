@@ -4,7 +4,8 @@
     {
         private readonly VCMSDbContext _context;
 
-        public UnitOfWork(VCMSDbContext context)
+        public UnitOfWork(VCMSDbContext context, UserManager<ApplicationUser> _user, 
+            IOptions<JwtOptions> _options, RoleManager<IdentityRole> _roleManager)
         {
             _context = context;
 
@@ -18,6 +19,7 @@
             Prescriptions = new PrescriptionRepository(_context);
             Receipts = new ReceiptRepository(_context);
             Species = new BaseRepository<Species>(_context);
+            Authentication = new AuthRepository(_user, _roleManager, _options);
         }
 
         public ICaseRepository Cases { get; private set; }
@@ -30,6 +32,7 @@
         public IPrescriptionRespository Prescriptions { get; private set; }
         public IReceiptRepository Receipts { get; private set; }
         public IBaseRepository<Species> Species { get; private set; }
+        public IAuthRepository Authentication { get; set; }
 
         public async Task<int> CommitAsync()
         {
