@@ -2,6 +2,7 @@
 
 namespace VCMS.API.Controllers
 {
+    [Authorize(Roles = Roles.Admin)]
     [ApiController]
     [Route("api/[controller]")]
     public class PrescriptionsController(IPrescriptionsService _prescriptionsService) : ControllerBase
@@ -10,6 +11,7 @@ namespace VCMS.API.Controllers
         [ProducesResponseType(typeof(Response<GetPrescriptionDto>), StatusCodes.Status200OK)]
         [ProducesResponseType(typeof(Response<GetPrescriptionDto>), StatusCodes.Status404NotFound)]
         [ResponseCache(CacheProfileName = "Any-180")]
+        [Authorize(Roles = Roles.User)]
         [HttpGet("{id:int}")]
         public async Task<IActionResult> GetPrescriptionById(int id)
         {

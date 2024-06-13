@@ -1,5 +1,6 @@
 ﻿namespace VCMS.API.Controllers
 {
+    [Authorize(Roles = Roles.Admin)]
     [Route("api/[controller]")]
     [ApiController]
     public class PatientsController : ControllerBase
@@ -18,6 +19,7 @@
         [ProducesResponseType(typeof(Response<GetPatientDto>), StatusCodes.Status200OK)]
         [ProducesResponseType(typeof(Response<GetPatientDto>), StatusCodes.Status404NotFound)]
         [ResponseCache(CacheProfileName = "Any-180")]
+        [Authorize(Roles = Roles.User)]
         [HttpGet("{id:int}")]
         public async Task<IActionResult> GetPatientById(int id)
         {

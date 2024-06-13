@@ -1,5 +1,6 @@
 ﻿namespace VCMS.API.Controllers
 {
+    [Authorize(Roles = Roles.Admin)]
     [ApiController]
     [Route("api/[controller]")]
     public class MedicationsController : ControllerBase
@@ -17,6 +18,7 @@
         [ProducesResponseType(typeof(Response<MedicationDto>), StatusCodes.Status200OK)]
         [ProducesResponseType(typeof(Response<MedicationDto>), StatusCodes.Status404NotFound)]
         [ResponseCache(CacheProfileName = "Any-180")]
+        [Authorize(Roles = Roles.User)]
         [HttpGet("{id:int}")]
         public async Task<IActionResult> GetMedicationbyId(int id)
         {
@@ -30,6 +32,7 @@
         [ProducesResponseType(typeof(Response<IEnumerable<MedicationDto>>), StatusCodes.Status200OK)]
         [ProducesResponseType(typeof(Response<IEnumerable<MedicationDto>>), StatusCodes.Status404NotFound)]
         [ResponseCache(CacheProfileName = "Any-180")]
+        [Authorize(Roles = Roles.User)]
         [HttpGet]
         public async Task<IActionResult> GetAllMedication()
         {
