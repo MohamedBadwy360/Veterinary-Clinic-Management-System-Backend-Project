@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using VCMS.EF.Data;
 
@@ -11,9 +12,11 @@ using VCMS.EF.Data;
 namespace VCMS.EF.Migrations
 {
     [DbContext(typeof(VCMSDbContext))]
-    partial class VCMSDbContextModelSnapshot : ModelSnapshot
+    [Migration("20240612040553_SeedRoles")]
+    partial class SeedRoles
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
