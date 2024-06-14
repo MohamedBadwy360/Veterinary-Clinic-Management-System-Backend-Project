@@ -1,5 +1,6 @@
 ﻿namespace VCMS.API.Controllers
 {
+    [Authorize(Roles = Roles.Admin)]
     [Route("api/[controller]")]
     [ApiController]
     public class ClientsController : ControllerBase
@@ -18,6 +19,7 @@
         [ProducesResponseType(typeof(Response<ClientDto>), StatusCodes.Status200OK)]
         [ProducesResponseType(typeof(Response<ClientDto>), StatusCodes.Status404NotFound)]
         [ResponseCache(CacheProfileName = "Any-180")]
+        [Authorize(Roles = Roles.User)]
         [HttpGet("{id:int}")]
         public async Task<IActionResult> GetClientById(int id)
         {

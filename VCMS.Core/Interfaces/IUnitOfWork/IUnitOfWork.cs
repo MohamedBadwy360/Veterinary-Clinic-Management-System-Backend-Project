@@ -54,6 +54,7 @@
         /// Repository for Species.
         /// </summary>
         IBaseRepository<Species> Species { get; }
+        IAuthRepository Authentication { get; }
 
         /// <summary>
         /// Commit changes to the database asynchronously.

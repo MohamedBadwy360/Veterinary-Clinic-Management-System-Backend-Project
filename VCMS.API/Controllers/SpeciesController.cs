@@ -3,6 +3,7 @@
     /// <summary>
     /// A controller for handling species related requests.
     /// </summary>
+    [Authorize(Roles = Roles.Admin)]
     [Route("api/[controller]")]
     [ApiController]
     public class SpeciesController : ControllerBase

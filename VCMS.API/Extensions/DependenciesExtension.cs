@@ -23,6 +23,8 @@
             services.AddScoped<IMedicationsService, MedicationsService>();
             services.AddScoped<IPrescriptionsService, PrescriptionsService>();
             services.AddScoped<IReceiptsService, ReceiptsService>();
+            services.AddScoped<IAuthService, AuthService>();
+            services.AddScoped<IAuthRepository, AuthRepository>();
         }
     }
 }

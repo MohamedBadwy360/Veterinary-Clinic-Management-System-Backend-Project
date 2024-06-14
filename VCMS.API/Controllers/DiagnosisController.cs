@@ -1,5 +1,6 @@
 ﻿namespace VCMS.API.Controllers
 {
+    [Authorize(Roles = Roles.Admin)]
     [Route("api/[controller]")]
     [ApiController]
     public class DiagnosisController : ControllerBase

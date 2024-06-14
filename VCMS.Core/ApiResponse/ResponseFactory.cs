@@ -28,7 +28,7 @@ public class ResponseFactory
     {
         return new Response<T>
         {
-            IsSucceeded = ((int)statusCode > 400) ? false : true,
+            IsSucceeded = ((int)statusCode >= 400) ? false : true,
             StatusCode = statusCode,
             Data = data,
             Message = message
@@ -199,6 +199,12 @@ public class ResponseFactory
     /// <returns>
     /// A response object with 409 status code and the given message.
     /// </returns>
+    public static Response<T> BadRequest<T>(T data, string message)
+        where T : class
+    {
+        return Create<T>(EResponseStatusCode.BadRequest, data, message);
+    }
+
     public static Response<T> Conflict<T>(string message)
         where T : class
     {

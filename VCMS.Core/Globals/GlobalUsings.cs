@@ -16,3 +16,5 @@ global using VCMS.Core.Dtos.MedicationDtos;
 global using VCMS.Core.Dtos.PrescribedMedsDtos;
 global using VCMS.Core.Dtos.PrescriptionDtos;
 global using VCMS.Core.Dtos.ReceiptDtos;
+global using Microsoft.AspNetCore.Identity;
+global using VCMS.Core.Dtos.AuthenticationDtos;

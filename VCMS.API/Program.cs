@@ -1,5 +1,3 @@
-using Microsoft.OpenApi.Models;
-
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
@@ -8,6 +6,11 @@ builder.Services.AddDbContext<VCMSDbContext>(options =>
 {
     options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultString"));
 });
+
+builder.Services.AddIdentity<ApplicationUser, IdentityRole>().AddEntityFrameworkStores<VCMSDbContext>();
+
+builder.Services.Configure<JwtOptions>(builder.Configuration.GetSection("JWT"));
+var jwtOptions = builder.Configuration.GetSection("JWT").Get<JwtOptions>();
 
 // Register dependencies
 builder.Services.RegisterDependencies();
@@ -22,12 +25,13 @@ builder.Services.AddControllers(options =>
     });
 });
 
+builder.Services.AddCustomJwtAuthentication(jwtOptions);
+
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
-builder.Services.AddSwaggerGen(options =>
-{
-    options.EnableAnnotations();
-});
+
+// Custom swagger authentication
+builder.Services.AddSwaggerGenJwtAuthentication();
 
 builder.Services.AddCors(options =>
 {
@@ -56,6 +60,7 @@ app.UseHttpsRedirection();
 
 app.UseCors();
 
+app.UseAuthentication();
 app.UseAuthorization();
 
 app.MapControllers();
