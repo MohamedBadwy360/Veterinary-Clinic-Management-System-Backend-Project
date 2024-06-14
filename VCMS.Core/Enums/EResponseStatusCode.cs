@@ -1,5 +1,8 @@
 ﻿namespace VCMS.Core.Enums
 {
+    /// <summary>
+    /// Enum for response status codes
+    /// </summary>
     public enum EResponseStatusCode
     {
         OK = 200,

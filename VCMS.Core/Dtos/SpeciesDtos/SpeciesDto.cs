@@ -1,5 +1,8 @@
 ﻿namespace VCMS.Core.Dtos.SpeciesDtos
 {
+    /// <summary>
+    /// Data transfer object for species
+    /// </summary>
     public class SpeciesDto
     {
         /// <summary>
