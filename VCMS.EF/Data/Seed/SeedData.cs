@@ -2,6 +2,10 @@
 {
     public static class SeedData
     {
+        /// <summary>
+        /// A Method to load some medications to seed database.
+        /// </summary>
+        /// <returns>List of Medications</returns>
         public static List<Medication> LoadMedications()
         {
             return new List<Medication>
@@ -76,6 +80,10 @@
             };
         }
 
+        /// <summary>
+        /// A Method to load some diagnostics to seed database.
+        /// </summary>
+        /// <returns>List of diagnostics</returns>
         public static List<Diagnosis> LoadDiagnostics()
         {
             return new List<Diagnosis>
@@ -99,6 +107,10 @@
             };
         }
 
+        /// <summary>
+        /// A Method to load some species to seed database.
+        /// </summary>
+        /// <returns>List of species</returns>
         public static List<Species> LoadSpecies()
         {
             return new List<Species>
@@ -117,6 +129,10 @@
             };
         }
 
+        /// <summary>
+        /// A Method to load some clients to seed database.
+        /// </summary>
+        /// <returns>List of clients</returns>
         public static List<Client> LoadClients()
         {
             return new List<Client>
@@ -138,6 +154,10 @@
             };
         }
 
+        /// <summary>
+        /// A Method to load some patients to seed database.
+        /// </summary>
+        /// <returns>List of patients</returns>
         public static List<Patient> LoadPatients()
         {
             return new List<Patient>
@@ -150,6 +170,10 @@
             };
         }
 
+        /// <summary>
+        /// A Method to load some doctors to seed database.
+        /// </summary>
+        /// <returns>List of doctors</returns>
         public static List<Doctor> LoadDoctors()
         {
             return new List<Doctor>
@@ -159,6 +183,10 @@
             };
         }
 
+        /// <summary>
+        /// A Method to load some cases to seed database.
+        /// </summary>
+        /// <returns>List of cases</returns>
         public static List<Case> LoadCases()
         {
             return new List<Case>
@@ -187,6 +215,10 @@
             };
         }
 
+        /// <summary>
+        /// A Method to load some prescriptions to seed database.
+        /// </summary>
+        /// <returns>List of prescriptions</returns>
         public static List<Prescription> LoadPrescriptions()
         {
             return new List<Prescription>
@@ -200,6 +232,10 @@
             };
         }
 
+        /// <summary>
+        /// A Method to load some prescribed medicines to seed database.
+        /// </summary>
+        /// <returns>List of prescribed medications</returns>
         public static List<PrescribedMeds> LoadPrescribedMeds()
         {
             return new List<PrescribedMeds>
@@ -245,6 +281,10 @@
             };
         }
 
+        /// <summary>
+        /// A Method to load some receipts to seed database.
+        /// </summary>
+        /// <returns>List of receipts</returns>
         public static List<Receipt> LoadReceipts()
         {
             return new List<Receipt>

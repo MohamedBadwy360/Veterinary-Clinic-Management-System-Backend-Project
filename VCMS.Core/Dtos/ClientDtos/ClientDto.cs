@@ -1,5 +1,8 @@
 ﻿namespace VCMS.Core.Dtos.ClientDtos
 {
+    /// <summary>
+    /// Data Transfer Object for Client
+    /// </summary>
     public class ClientDto
     {
         /// <summary>

@@ -1,11 +1,24 @@
-﻿using VCMS.Core.Dtos.PrescribedMedsDtos;
-
-namespace VCMS.API.Controllers
+﻿namespace VCMS.API.Controllers
 {
+    /// <summary>
+    /// A controller for handling prescription-related requests.
+    /// </summary>
+    /// <param name="_prescriptionsService">
+    /// Service for handling prescription-related requests.
+    /// </param>
     [ApiController]
     [Route("api/[controller]")]
     public class PrescriptionsController(IPrescriptionsService _prescriptionsService) : ControllerBase
     {
+        /// <summary>
+        /// Get a prescription by Id.
+        /// </summary>
+        /// <param name="id">
+        /// Id of the prescription to get.
+        /// </param>
+        /// <returns>
+        /// Response <see cref="Response{GetPrescriptionDto}"/> containing the prescription with the given Id.
+        /// </returns>
         [SwaggerOperation(Summary = "Get a prescription by Id")]
         [ProducesResponseType(typeof(Response<GetPrescriptionDto>), StatusCodes.Status200OK)]
         [ProducesResponseType(typeof(Response<GetPrescriptionDto>), StatusCodes.Status404NotFound)]
@@ -18,6 +31,12 @@ namespace VCMS.API.Controllers
         }
 
 
+        /// <summary>
+        /// Get a list of all prescriptions.
+        /// </summary>
+        /// <returns>
+        /// Response <see cref="Response{IEnumerable{GetPrescriptionDto}}"/> containing a list of all prescriptions.
+        /// </returns>
         [SwaggerOperation(Summary = "Get all prescriptions")]
         [ProducesResponseType(typeof(Response<IEnumerable<GetPrescriptionDto>>), StatusCodes.Status200OK)]
         [ProducesResponseType(typeof(Response<IEnumerable<GetPrescriptionDto>>), StatusCodes.Status404NotFound)]
@@ -30,6 +49,15 @@ namespace VCMS.API.Controllers
         }
 
 
+        /// <summary>
+        /// Create a prescription.
+        /// </summary>
+        /// <param name="createPrescriptionDto">
+        /// Prescription data to be created.
+        /// </param>
+        /// <returns>
+        /// A respone <see cref="Response{CreatePrescriptionDto}"/>  with the created prescription if succeeded.
+        /// </returns>
         [SwaggerOperation(Summary = "Create a prescription")]
         [ProducesResponseType(typeof(Response<CreatePrescriptionDto>), StatusCodes.Status201Created)]
         [ResponseCache(CacheProfileName = "Any-180")]
@@ -41,6 +69,18 @@ namespace VCMS.API.Controllers
         }
 
 
+        /// <summary>
+        /// Update a prescription.
+        /// </summary>
+        /// <param name="id">
+        /// Id of prescription to be updated.
+        /// </param>
+        /// <param name="updatePrescriptionDto">
+        /// Prescription data to be updated.
+        /// </param>
+        /// <returns>
+        /// A response <see cref="Response{UpdatePrescriptionDto}"/> 
+        /// </returns>
         [SwaggerOperation(Summary = "Update a prescription")]
         [ProducesResponseType(typeof(Response<UpdatePrescriptionDto>), StatusCodes.Status200OK)]
         [ProducesResponseType(typeof(Response<UpdatePrescriptionDto>), StatusCodes.Status404NotFound)]

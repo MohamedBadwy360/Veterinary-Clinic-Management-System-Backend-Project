@@ -1,5 +1,8 @@
 ﻿namespace VCMS.Core.Dtos.PatientDtos
 {
+    /// <summary>
+    /// Data Transfer Object for Patient
+    /// </summary>
     public abstract class PatientDto
     {
         /// <summary>

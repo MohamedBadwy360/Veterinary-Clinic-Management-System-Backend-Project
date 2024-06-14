@@ -1,5 +1,8 @@
 ﻿namespace VCMS.Core.Dtos.DoctorDtos
 {
+    /// <summary>
+    /// Data transfer object for Doctor entity
+    /// </summary>
     public class DoctorDto
     {
         /// <summary>

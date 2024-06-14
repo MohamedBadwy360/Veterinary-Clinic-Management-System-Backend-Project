@@ -1,11 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace VCMS.Core.Dtos.CaseDtos
+﻿namespace VCMS.Core.Dtos.CaseDtos
 {
+    /// <summary>
+    /// Data transfer object for updating a case.
+    /// </summary>
     public class UpdateCaseDto
     {
         /// <summary>

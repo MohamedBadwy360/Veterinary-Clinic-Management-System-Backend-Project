@@ -2,6 +2,12 @@
 {
     public static class DependenciesExtension
     {
+        /// <summary>
+        /// A method to register all dependencies in the application
+        /// </summary>
+        /// <param name="services">
+        /// A collection of service descriptors
+        /// </param>
         public static void RegisterDependencies(this IServiceCollection services)
         {
             services.AddAutoMapper(typeof(SpeciesMappingProfile).Assembly);
