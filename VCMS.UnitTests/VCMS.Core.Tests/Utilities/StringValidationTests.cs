@@ -1,6 +1,4 @@
-﻿using VCMS.Core.Utilities;
-
-namespace VCMS.UnitTests.VCMSCoreTests.UtilitiesTests;
+﻿namespace VCMS.Core.Tests.Utilities;
 
 public class StringValidationTests
 {

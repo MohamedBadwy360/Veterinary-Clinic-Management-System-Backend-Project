@@ -1,0 +1,9 @@
+﻿global using VCMS.Core.Utilities;
+global using VCMS.Core.ApiResponse;
+global using VCMS.Core.Enums;
+global using System.Reflection;
+global using Microsoft.EntityFrameworkCore;
+global using VCMS.EF.Data;
+global using VCMS.Core.Models;
+global using VCMS.EF.Repositories;
+global using VCMS.Tests.VCMS.EF.Tests.Data;
