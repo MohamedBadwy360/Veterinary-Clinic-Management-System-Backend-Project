@@ -11,7 +11,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "VCMS.API", "VCMS.API\VCMS.A
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "VCMS.Business", "VCMS.Business\VCMS.Business.csproj", "{7E2228F4-71DB-409B-BFF8-59A65F4C5805}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VCMS.UnitTests", "VCMS.UnitTests\VCMS.UnitTests.csproj", "{6FA3B35A-0AC6-4E75-AAAD-EEE941603F1B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "VCMS.Tests", "VCMS.UnitTests\VCMS.Tests.csproj", "{6FA3B35A-0AC6-4E75-AAAD-EEE941603F1B}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
