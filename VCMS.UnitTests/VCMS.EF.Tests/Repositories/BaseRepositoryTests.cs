@@ -1,7 +1,4 @@
-﻿using System;
-using System.Linq.Expressions;
-
-namespace VCMS.Tests.VCMS.EF.Tests.Repositories
+﻿namespace VCMS.Tests.VCMS.EF.Tests.Repositories
 {
     public class BaseRepositoryTests
     {
