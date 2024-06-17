@@ -55,5 +55,34 @@
         /// Error message
         /// </summary>
         public string Message { get; set; }
+
+        /// <summary>
+        /// Equals method override for Response class.
+        /// </summary>
+        /// <param name="obj">
+        /// The object to compare with the current object.
+        /// </param>
+        /// <returns>
+        /// True if the specified object is equal to the current object; otherwise, false.
+        /// </returns>
+        public override bool Equals(object obj)
+        {
+            return obj is Response<T> response &&
+                IsSucceeded == response.IsSucceeded &&
+                StatusCode == response.StatusCode &&
+                EqualityComparer<T>.Default.Equals(Data, response.Data) &&
+                Message == response.Message;
+        }
+
+        /// <summary>
+        /// GetHashCode method override for Response class.
+        /// </summary>
+        /// <returns>
+        /// Hash code for the current object.
+        /// </returns>
+        public override int GetHashCode()
+        {
+            return HashCode.Combine(IsSucceeded, StatusCode, Data, Message);
+        } 
     }
 }
