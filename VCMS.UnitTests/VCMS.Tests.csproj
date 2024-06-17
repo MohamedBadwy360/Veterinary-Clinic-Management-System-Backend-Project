@@ -18,6 +18,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\VCMS.API\VCMS.API.csproj" />
     <ProjectReference Include="..\VCMS.Business\VCMS.Business.csproj" />
     <ProjectReference Include="..\VCMS.Core\VCMS.Core.csproj" />
     <ProjectReference Include="..\VCMS.EF\VCMS.EF.csproj" />

@@ -13,3 +13,6 @@ global using Moq;
 global using VCMS.Business.Services;
 global using VCMS.Core.Dtos.SpeciesDtos;
 global using VCMS.Core.Interfaces.IUnitOfWork;
+global using Microsoft.AspNetCore.Mvc;
+global using VCMS.API.Controllers;
+global using VCMS.Core.Interfaces.ServicesInterfaces;
