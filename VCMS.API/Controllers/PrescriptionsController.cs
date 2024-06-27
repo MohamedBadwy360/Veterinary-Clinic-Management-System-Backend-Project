@@ -99,7 +99,7 @@
         [ProducesResponseType(StatusCodes.Status204NoContent)]
         [ProducesResponseType(typeof(Response<DeletePrescriptionDto>), StatusCodes.Status404NotFound)]
         [ResponseCache(CacheProfileName = "NoCache")]
-        [HttpDelete]
+        [HttpDelete("{id:int}")]
         public async Task<IActionResult> DeletePrescription(int id)
         {
             var response = await _prescriptionsService.DeletePrescriptionAsync(id);
@@ -113,10 +113,10 @@
         [ProducesResponseType(typeof(PrescribedMedsDto), StatusCodes.Status404NotFound)]
         [ResponseCache(CacheProfileName = "NoCache")]
         [HttpPut("[action]")]
-        public async Task<IActionResult> AddMedicationToPrescription(int prescriptionId, int medicationId, 
+        public async Task<IActionResult> AddMedicationToPrescription(int prescriptionId, int medicationId,
             int quantity, string frequency)
         {
-            var response = await _prescriptionsService.AddMedicationToPrescription(prescriptionId, 
+            var response = await _prescriptionsService.AddMedicationToPrescription(prescriptionId,
                 medicationId, quantity, frequency);
             return StatusCode((int)response.StatusCode, response);
         }
@@ -129,9 +129,9 @@
         [HttpDelete("[action]")]
         public async Task<IActionResult> DeleteMedicationFromPrescription(int prescriptionId, int medicationId)
         {
-            var response = await _prescriptionsService.DeleteMedicationFromPrescription(prescriptionId, 
+            var response = await _prescriptionsService.DeleteMedicationFromPrescription(prescriptionId,
                 medicationId);
-            return (response.StatusCode == EResponseStatusCode.NoContent) ? NoContent() : 
+            return (response.StatusCode == EResponseStatusCode.NoContent) ? NoContent() :
                 StatusCode((int)response.StatusCode, response);
         }
     }

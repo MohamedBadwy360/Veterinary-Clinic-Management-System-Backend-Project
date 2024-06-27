@@ -13,7 +13,7 @@
         }
 
 
-        [SwaggerOperation(Summary = "Get a medication by Id", 
+        [SwaggerOperation(Summary = "Get a medication by Id",
             Description = "Get a medication by id from database.")]
         [ProducesResponseType(typeof(Response<MedicationDto>), StatusCodes.Status200OK)]
         [ProducesResponseType(typeof(Response<MedicationDto>), StatusCodes.Status404NotFound)]
@@ -71,11 +71,11 @@
         [ProducesResponseType(StatusCodes.Status204NoContent)]
         [ProducesResponseType(typeof(Response<MedicationDto>), StatusCodes.Status404NotFound)]
         [ResponseCache(CacheProfileName = "NoCache")]
-        [HttpDelete]
+        [HttpDelete("{id:int}")]
         public async Task<IActionResult> DeleteMedication(int id)
         {
             var response = await _medicationsService.DeleteMedicationAsync(id);
-            return (response.StatusCode == EResponseStatusCode.NoContent) ? NoContent() : 
+            return (response.StatusCode == EResponseStatusCode.NoContent) ? NoContent() :
                 StatusCode((int)response.StatusCode, response);
         }
     }

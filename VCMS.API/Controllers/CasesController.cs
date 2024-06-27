@@ -82,11 +82,11 @@
         [ProducesResponseType(StatusCodes.Status204NoContent)]
         [ProducesResponseType(typeof(Response<DeleteCaseDto>), StatusCodes.Status404NotFound)]
         [ResponseCache(CacheProfileName = "NoCache")]
-        [HttpDelete]
+        [HttpDelete("{id:int}")]
         public async Task<IActionResult> DeleteCase(int id)
         {
             var response = await _casesService.DeleteCaseAsync(id);
-            return (response.StatusCode == EResponseStatusCode.NoContent) ? NoContent() : 
+            return (response.StatusCode == EResponseStatusCode.NoContent) ? NoContent() :
                 StatusCode((int)response.StatusCode, response);
         }
     }

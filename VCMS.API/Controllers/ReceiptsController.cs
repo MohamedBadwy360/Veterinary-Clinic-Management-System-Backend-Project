@@ -35,7 +35,7 @@
             return StatusCode((int)response.StatusCode, response);
         }
 
-        
+
         /// <summary>
         /// Get a list of all receipts.
         /// </summary>
@@ -120,7 +120,7 @@
         [ProducesResponseType(StatusCodes.Status204NoContent)]
         [ProducesResponseType(typeof(Response<DeleteReceiptDto>), StatusCodes.Status404NotFound)]
         [ResponseCache(CacheProfileName = "NoCache")]
-        [HttpDelete]
+        [HttpDelete("{id:int}")]
         public async Task<IActionResult> DeleteReceipt(int id)
         {
             var response = await _receiptsService.DeleteReceiptAsync(id);
