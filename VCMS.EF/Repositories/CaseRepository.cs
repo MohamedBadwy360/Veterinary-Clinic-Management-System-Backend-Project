@@ -2,12 +2,8 @@
 {
     public class CaseRepository : BaseRepository<Case>, ICaseRepository
     {
-        private readonly VCMSDbContext _context;
 
-        public CaseRepository(VCMSDbContext context) : base(context)
-        {
-            _context = context;
-        }
+        public CaseRepository(VCMSDbContext context) : base(context) { }
 
         public async Task<IEnumerable<GetCaseDto>> GetAllCasesWithClientNameSpeciesNameDiagnosisNameDoctorName()
         {

@@ -2,7 +2,7 @@
 {
     public class BaseRepository<T> : IBaseRepository<T> where T : class
     {
-        private readonly VCMSDbContext _context;
+        protected readonly VCMSDbContext _context;
         public BaseRepository(VCMSDbContext context)
         {
             _context = context;
@@ -168,6 +168,6 @@
             }
 
             return await query.ToListAsync();
-        }  
+        }
     }
 }

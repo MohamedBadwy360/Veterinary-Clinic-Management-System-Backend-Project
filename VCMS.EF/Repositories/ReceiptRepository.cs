@@ -2,11 +2,7 @@
 {
     public class ReceiptRepository : BaseRepository<Receipt>, IReceiptRepository
     {
-        private readonly VCMSDbContext _context;
-        public ReceiptRepository(VCMSDbContext context) : base(context)
-        {
-            _context = context;
-        }
+        public ReceiptRepository(VCMSDbContext context) : base(context) { }
         //public async Task<decimal> GetReceiptTotalPriceByPrescriptionId(int prescriptionId)
         //{
         //    return await _context.Receipts.

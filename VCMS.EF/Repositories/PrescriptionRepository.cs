@@ -2,11 +2,7 @@
 {
     public class PrescriptionRepository : BaseRepository<Prescription>, IPrescriptionRespository
     {
-        private readonly VCMSDbContext _context;
-        public PrescriptionRepository(VCMSDbContext context) : base(context)
-        {
-            _context = context;
-        }
+        public PrescriptionRepository(VCMSDbContext context) : base(context) { }
 
         public async Task<IEnumerable<GetPrescriptionDto>> GetAllPrescriptionsAsync()
         {

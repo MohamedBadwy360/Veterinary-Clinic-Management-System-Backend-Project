@@ -2,12 +2,7 @@
 {
     public class PatientRepository : BaseRepository<Patient>, IPatientRepository
     {
-        private readonly VCMSDbContext _context;
-
-        public PatientRepository(VCMSDbContext context) : base(context) 
-        {
-            _context = context;
-        }
+        public PatientRepository(VCMSDbContext context) : base(context) { }
 
         // better in performance because this select only necessary columns
         public async Task<IEnumerable<GetPatientDto>> GetAllPatientsWithClientNameAndSpeciesName()
